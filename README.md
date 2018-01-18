@@ -1,4 +1,2 @@
 # building
-Visual Studio Community 2017 - .NET 4.7
-
-
+Visual Studio Community 2017 - .NET 4.6.1
