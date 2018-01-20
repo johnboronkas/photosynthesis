@@ -46,6 +46,11 @@ namespace photosynthesis.state
             return string.Format("({0}, {1}, {2})", Q, R, S);
         }
 
+        public static Hex Zero()
+        {
+            return new Hex(0, 0, 0);
+        }
+
         public static Hex operator +(Hex h1, Hex h2)
         {
             return new Hex(h1.Q + h2.Q, h1.R + h2.R, h1.S + h2.S);

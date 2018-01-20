@@ -29,7 +29,8 @@ namespace photosynthesis.state
                 for (int r = r1; r <= r2; r++)
                 {
                     var hex = new Hex(q, r, -q - r);
-                    State.Add(hex, new Space(hex));
+                    var scoreValue = (BoardRadius + 1) - Hex.Distance(hex, Hex.Zero());
+                    State.Add(hex, new Space(hex, scoreValue));
                 }
             }
         }

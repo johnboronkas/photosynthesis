@@ -14,11 +14,12 @@ namespace photosynthesis.state
         public bool IsLit { get; set; }
         public int ScoreValue { get; private set; }
 
-        public Space(Hex hex)
+        public Space(Hex hex, int scoreValue)
         {
             Hex = hex;
             Set(Team.None, Token.None);
             IsLit = true;
+            ScoreValue = scoreValue;
         }
 
         public void Set(Team team, Token token)
