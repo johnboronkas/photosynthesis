@@ -1,4 +1,5 @@
 ﻿using photosynthesis.interpreter;
+using photosynthesis.state;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,13 @@ namespace photosynthesis
     {
         static void Main(string[] args)
         {
-            var reader = new CommandReader();
-            var input = GetUserInput();
-            reader.DoAction(input);
+            var gameFile = new GameFile();
+            var interpreter = new CommandInterpreter();
+
+            while (true)
+            {
+                while (!interpreter.DoAction(GetUserInput(), gameFile)) ;
+            }
 
             Console.ReadLine();
         }

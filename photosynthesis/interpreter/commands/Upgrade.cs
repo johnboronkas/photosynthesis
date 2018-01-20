@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace photosynthesis.interpreter.commands
 {
-    public class Buy : Command
+    public class Upgrade : Command
     {
         public void Perform(params string[] parameters)
         {
-            Console.Write("Buying: ");
+            Console.Write("Upgrading: ");
             for (int i = 0; i < parameters.Count(); i++)
             {
                 Console.Write(parameters[i] + " ");
