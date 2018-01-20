@@ -18,9 +18,12 @@ namespace photosynthesis
             var gameFile = new GameFile();
             var interpreter = new CommandInterpreter();
 
+            var board = new Board();
+
             while (true)
             {
-                while (!interpreter.DoAction(GetUserInput(), gameFile)) ;
+                Console.WriteLine(board);
+                while (!interpreter.DoAction(GetUserInput(), gameFile));
             }
 
             Console.ReadLine();

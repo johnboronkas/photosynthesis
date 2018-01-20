@@ -11,11 +11,14 @@ namespace photosynthesis.state
         public Hex Hex { get; private set; }
         public Team Team { get; private set; }
         public Token Token { get; private set; }
+        public bool IsLit { get; set; }
+        public int ScoreValue { get; private set; }
 
         public Space(Hex hex)
         {
             Hex = hex;
             Set(Team.None, Token.None);
+            IsLit = true;
         }
 
         public void Set(Team team, Token token)
@@ -25,6 +28,11 @@ namespace photosynthesis.state
 
             Team = team;
             Token = token;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}{1}", (int)Team, (int)Token);
         }
     }
 }
