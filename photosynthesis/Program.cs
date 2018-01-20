@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace photosynthesis
 {
+    /// <summary>
+    /// Start with the board facing you with the sun start marker in the top right.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
