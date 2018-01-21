@@ -1,4 +1,5 @@
-﻿using System;
+﻿using photosynthesis.state;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,9 @@ namespace photosynthesis.interpreter.commands
 {
     public interface Command
     {
-        void Perform(params string[] parameters);
+        /// <summary>
+        /// Throws InvalidCommandException if the command provided is invalid or illegal.
+        /// </summary>
+        void Perform(GameFile gameFile, Board board, Player player, params string[] parameters);
     }
 }

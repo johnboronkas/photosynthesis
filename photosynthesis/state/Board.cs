@@ -35,7 +35,7 @@ namespace photosynthesis.state
             }
         }
 
-        public override string ToString()
+        public string SpacesHumanReadable()
         {
             StringBuilder board = new StringBuilder();
             for (int q = -BoardRadius; q <= BoardRadius; q++)
@@ -58,6 +58,36 @@ namespace photosynthesis.state
             }
 
             return board.ToString();
+        }
+
+        public string HexesHumanReadable()
+        {
+            StringBuilder board = new StringBuilder();
+            for (int q = -BoardRadius; q <= BoardRadius; q++)
+            {
+                int r1 = Math.Max(-BoardRadius, -q - BoardRadius);
+                int r2 = Math.Min(BoardRadius, -q + BoardRadius);
+                board.Append("".PadLeft(Math.Abs(q)*6 + 12));
+
+                for (int r = r1; r <= r2; r++)
+                {
+                    var hex = new Hex(q, r, -q - r);
+                    Space space;
+                    State.TryGetValue(hex, out space);
+
+                    board.Append(hex + "  ");
+                }
+
+                board.AppendLine();
+                board.AppendLine();
+            }
+
+            return board.ToString();
+        }
+
+        public override string ToString()
+        {
+            return SpacesHumanReadable();
         }
     }
 }

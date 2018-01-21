@@ -1,4 +1,5 @@
-﻿using System;
+﻿using photosynthesis.state;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,12 @@ namespace photosynthesis.interpreter.commands
 {
     public class Upgrade : Command
     {
-        public void Perform(params string[] parameters)
+        public void Perform(GameFile gameFile, Board board, Player player, params string[] parameters)
         {
-            Console.Write("Upgrading: ");
-            for (int i = 0; i < parameters.Count(); i++)
-            {
-                Console.Write(parameters[i] + " ");
-            }
-            Console.WriteLine();
+            Space space;
+            board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space);
+
+            space.Set(player.Team, Token.SmallTree);
         }
     }
 }

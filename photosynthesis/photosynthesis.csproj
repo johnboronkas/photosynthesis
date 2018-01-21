@@ -45,12 +45,17 @@
     <Compile Include="interpreter\commands\Command.cs" />
     <Compile Include="interpreter\commands\Buy.cs" />
     <Compile Include="interpreter\CommandInterpreter.cs" />
+    <Compile Include="interpreter\commands\Help.cs" />
+    <Compile Include="interpreter\commands\ShowHex.cs" />
+    <Compile Include="interpreter\commands\InvalidCommandException.cs" />
     <Compile Include="interpreter\commands\Seed.cs" />
     <Compile Include="interpreter\commands\Upgrade.cs" />
+    <Compile Include="interpreter\commands\WriteGameFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="state\Board.cs" />
     <Compile Include="GameFile.cs" />
+    <Compile Include="state\Player.cs" />
     <Compile Include="state\Space.cs" />
     <Compile Include="state\Team.cs" />
     <Compile Include="state\Token.cs" />
