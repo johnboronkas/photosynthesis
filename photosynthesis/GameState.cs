@@ -13,6 +13,7 @@ namespace photosynthesis
         public int CurrentRound { get; private set; }
 
         public List<Player> Players { get; private set; }
+        public int PlayerNumberFirstToMove { get; private set; }
         public int CurrentPlayerNumber { get; private set; }
         public Player CurrentPlayer { get; private set; }
         public Board Board { get; private set; }
@@ -22,6 +23,7 @@ namespace photosynthesis
         {
             CurrentRound = 0;
             Players = players;
+            PlayerNumberFirstToMove = 0;
             CurrentPlayerNumber = 0;
             CurrentPlayer = Players[CurrentPlayerNumber];
             Board = board;
@@ -31,10 +33,10 @@ namespace photosynthesis
         public void EndTurn()
         {
             CurrentPlayerNumber = ++CurrentPlayerNumber % Players.Count;
-            CurrentPlayer = Players[CurrentPlayerNumber];
             
-            if (CurrentPlayerNumber == 0)
+            if (CurrentPlayerNumber == PlayerNumberFirstToMove)
             {
+                PlayerNumberFirstToMove = ++CurrentPlayerNumber % Players.Count;
                 Board.AdvanceSunPosition();
 
                 if (Board.CurrentSunPosition == SunPosition.North)
@@ -46,9 +48,11 @@ namespace photosynthesis
                         EndOfGame();
                     }
                 }
+
+                CollectLightPoints();
             }
 
-            CollectLightPoints();
+            CurrentPlayer = Players[CurrentPlayerNumber];
         }
 
         public void CollectLightPoints()

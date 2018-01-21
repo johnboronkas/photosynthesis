@@ -26,6 +26,8 @@ namespace photosynthesis
                 new Player(Team.Green),
                 new Player(Team.Yellow),
             }, board, gameFile);
+
+            // TODO After each player places both starting trees, need to call gameState.CollectLightPoints().
             
             while (true)
             {
