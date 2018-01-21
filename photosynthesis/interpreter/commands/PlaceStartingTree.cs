@@ -12,8 +12,11 @@ namespace photosynthesis.interpreter.commands
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Space space;
-            gameState.Board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space);
-            
+            if (!gameState.Board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space))
+            {
+                return new CommandResponse(false, "Invalid hex. Use 'ShowHex' to view cube coordinates.");
+            }
+
             if (space.ScoreValue <= 1)
             {
                 space.Set(gameState.CurrentPlayer.Team, Token.SmallTree);

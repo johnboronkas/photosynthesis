@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="interpreter\commands\CommandResponse.cs" />
     <Compile Include="interpreter\commands\DebugAddLightPoints.cs" />
+    <Compile Include="interpreter\commands\DebugShopToHand.cs" />
     <Compile Include="interpreter\commands\Players.cs" />
     <Compile Include="interpreter\commands\ShowBoard.cs" />
     <Compile Include="GameState.cs" />

@@ -18,8 +18,8 @@ namespace photosynthesis.interpreter
             try
             {
                 var type = Type.GetType("photosynthesis.interpreter.commands." + action.First(), true, true);
-                Command instance = (Command)Activator.CreateInstance(type);
-                CommandResponse response = instance.Perform(gameState, action.ToArray());
+                Command command = (Command)Activator.CreateInstance(type);
+                CommandResponse response = command.Perform(gameState, action.ToArray());
 
                 if (response.IsSuccessful)
                 {
@@ -38,7 +38,8 @@ namespace photosynthesis.interpreter
                     e is TypeLoadException || e is ArgumentException || e is FileNotFoundException ||
                     e is FileLoadException || e is BadImageFormatException || e is NotSupportedException ||
                     e is TargetInvocationException || e is MethodAccessException || e is MemberAccessException ||
-                    e is InvalidComObjectException || e is MissingMethodException || e is COMException || e is InvalidOperationException)
+                    e is InvalidComObjectException || e is MissingMethodException || e is COMException || e is InvalidOperationException ||
+                    e is NullReferenceException)
                 {
                     Console.WriteLine(e);
                     return false;

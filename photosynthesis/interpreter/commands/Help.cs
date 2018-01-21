@@ -29,6 +29,7 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine("WriteGameFile - Writes the current gamefile to disk (overwrites).");
             help.AppendLine("\n---- DEBUG ---- (below commands may only be used if debug mode is set in GameState)");
             help.AppendLine("DebugAddLightPoints - Maxes out every player's light points.");
+            help.AppendLine("DebugShopToHand - Moves all player's shop tokens into their hands.");
 
             Console.WriteLine(help.ToString());
             return new CommandResponse(true);

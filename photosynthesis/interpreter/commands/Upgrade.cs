@@ -13,7 +13,10 @@ namespace photosynthesis.interpreter.commands
         {
             Player player = gameState.CurrentPlayer;
             Space space;
-            gameState.Board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space);
+            if (!gameState.Board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space))
+            {
+                return new CommandResponse(false, "Invalid hex. Use 'ShowHex' to view cube coordinates.");
+            }
 
             if (space.Team != player.Team) { return new CommandResponse(false, "Cannot upgrade unowned hex."); }
 
