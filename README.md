@@ -1,6 +1,9 @@
 # building
 Visual Studio Community 2017 - .NET 4.6.1
 
+# project vision
+Use a standard notation to store games. Use various non-deterministic AIs to generate games. Feed generated games into a machine learning algorithm. Face machine learning algorithm against itself to continue learning.
+
 # physical setup
 Follow the advanced rules and setup with the board facing you and the sun start position at the top-right hand courner of the board.
 
