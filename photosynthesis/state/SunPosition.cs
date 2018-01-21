@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace photosynthesis.state
+﻿namespace photosynthesis.state
 {
     /// <summary>
     /// Sun starts to the North, and moves clockwise around the board.

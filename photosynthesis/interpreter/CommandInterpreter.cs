@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using photosynthesis.interpreter.commands;
 using photosynthesis.state;
 using System.Reflection;
