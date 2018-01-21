@@ -9,7 +9,7 @@ namespace photosynthesis.interpreter.commands
 {
     public class Upgrade : Command
     {
-        public void Perform(GameFile gameFile, Board board, Player player, params string[] parameters)
+        public void Perform(GameFile gameFile, Board board, Player player, List<Player> players, params string[] parameters)
         {
             Space space;
             board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space);

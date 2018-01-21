@@ -9,7 +9,7 @@ namespace photosynthesis.interpreter.commands
 {
     public class ShowHex : Command
     {
-        public void Perform(GameFile gameFile, Board board, Player player, params string[] parameters)
+        public void Perform(GameFile gameFile, Board board, Player player, List<Player> players, params string[] parameters)
         {
             Console.WriteLine(board.HexesHumanReadable());
         }

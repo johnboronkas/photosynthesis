@@ -9,9 +9,11 @@ namespace photosynthesis.interpreter.commands
 {
     public class WriteGameFile : Command
     {
-        public void Perform(GameFile gameFile, Board board, Player player, params string[] parameters)
+        public void Perform(GameFile gameFile, Board board, Player player, List<Player> players, params string[] parameters)
         {
-            gameFile.WriteToDisk(Environment.CurrentDirectory + "gamefile.txt");
+            var path = Environment.CurrentDirectory + "\\gamefile.txt";
+            gameFile.WriteToDisk(path);
+            Console.WriteLine(string.Format("Game file written to: `{0}`.", path));
         }
     }
 }

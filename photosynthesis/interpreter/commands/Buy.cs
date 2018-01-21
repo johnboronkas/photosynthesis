@@ -9,7 +9,7 @@ namespace photosynthesis.interpreter.commands
 {
     public class Buy : Command
     {
-        public void Perform(GameFile gameFile, Board board, Player player, params string[] parameters)
+        public void Perform(GameFile gameFile, Board board, Player player, List<Player> players, params string[] parameters)
         {
             for (int i = 0; i < parameters.Count(); i++)
             {
