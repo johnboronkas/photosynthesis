@@ -7,6 +7,9 @@ Follow the advanced rules and setup with the board facing you and the sun start 
 # game file
 A list of moves from an initial gamestate that can be used to save, restore, or replay a game. Much like [chess notation](https://en.wikipedia.org/wiki/Chess_notation).
 
+In the form:
+`round sunPosition player action`
+
 # game board
 A hex-grid representation of the game board. Using the "pointy topped" version with cube coordinates.
 
