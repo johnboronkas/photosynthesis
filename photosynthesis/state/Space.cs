@@ -39,7 +39,7 @@ namespace photosynthesis.state
 
         public override string ToString()
         {
-            return string.Format("{0}{1}", (int)Team, (int)Token);
+            return string.Format("{0}{1}", Team == Team.None ? "-" : ((int)Team).ToString(), Token == Token.None ? "-" : ((int)Token).ToString());
         }
     }
 }

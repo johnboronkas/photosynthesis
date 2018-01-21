@@ -52,7 +52,7 @@ namespace photosynthesis.state
         public string SpacesHumanReadable()
         {
             StringBuilder board = new StringBuilder();
-            board.AppendLine("Sun is to the " + CurrentSunPosition);
+            board.AppendLine(string.Format("Sun is to the {0}.", CurrentSunPosition));
 
             for (int q = -BoardRadius; q <= BoardRadius; q++)
             {

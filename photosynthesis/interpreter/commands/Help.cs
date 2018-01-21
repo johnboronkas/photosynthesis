@@ -14,6 +14,7 @@ namespace photosynthesis.interpreter.commands
             StringBuilder help = new StringBuilder();
 
             help.AppendLine("Help - Prints this help menu.");
+            help.AppendLine("Exit - Exits the program.");
             help.AppendLine("\n---- MOVES ----");
             help.AppendLine("PlaceStartingTree p q r - Places a small tree on the given cube coordinate. Can only be used on the outer rim of the board.");
             help.AppendLine("Buy tokenID - Buys a token from your shop.");
@@ -21,7 +22,7 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine("Upgrade p q r - Upgrades the given cube coordinate.");
             help.AppendLine("Pass - End your turn and advance the game.");
             help.AppendLine("\n---- VISUAL ----");
-            help.AppendLine("ShowBoard - Prints TeamNum and Token, where 9 is none.");
+            help.AppendLine("ShowBoard - Prints TeamNum and Token, where '--' is none.");
             help.AppendLine("ShowHex - Prints cube coordinates (p, q, r) of every hex.");
             help.AppendLine("Players - Prints Team : CurrentLightPoints for every player.");
             // TODO Show all player's shops and hands.
