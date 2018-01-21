@@ -22,8 +22,7 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine("\n---- VISUAL ----");
             help.AppendLine("ShowBoard - Prints TeamNum and Token, where '--' is none.");
             help.AppendLine("ShowHex - Prints cube coordinates (p, q, r) of every hex.");
-            help.AppendLine("Players - Prints Team : CurrentLightPoints for every player.");
-            // TODO Show all player's shops and hands.
+            help.AppendLine("Players - Prints player stats for every player.");
             // TODO Load gamefile and step through it forwards (to 'watch' the game).
             // TODO Add score tokens.
             help.AppendLine("WriteGameFile - Writes the current gamefile to disk (overwrites).");

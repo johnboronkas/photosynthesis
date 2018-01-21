@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace photosynthesis.state
 {
@@ -46,6 +47,7 @@ namespace photosynthesis.state
         public int LightPoints { get; private set; }
         public List<Token> Hand { get; private set; }
         public List<Token> Shop { get; private set; }
+        public int Score { get; set; }
 
         public Player(Team team)
         {
@@ -75,6 +77,7 @@ namespace photosynthesis.state
                 Token.LargeTree,
                 Token.LargeTree,
             };
+            Score = 0;
         }
 
         public void AddLightPoints(int lightPoints)
@@ -97,16 +100,32 @@ namespace photosynthesis.state
 
         public void ShopAddToken(Token token)
         {
-            int shopTokenCount = Shop.GroupBy(t => t).Select(t => t).Count();
+            int shopTokenCount = GetTokenCount(Shop, token);
             if (shopTokenCount < ShopMaxes[token])
             {
                 Shop.Add(token);
             }
         }
 
+        public int GetTokenCount(List<Token> tokens, Token tokenToCount)
+        {
+            return tokens.Where(t => t == tokenToCount).Count();
+        }
+
         public override string ToString()
         {
-            return string.Format("{0} : {1}", Team, LightPoints);
+            StringBuilder player = new StringBuilder();
+
+            player.AppendFormat("{0}: Score: {1}, Light Points: {2}\n", Team, Score, LightPoints);
+            player.AppendFormat("\tHand:\n");
+            player.AppendFormat("\t\tSeed: {0}, Sml: {1}, Med: {2}, Lrg: {3}\n",
+                GetTokenCount(Hand, Token.Seed), GetTokenCount(Hand, Token.SmallTree), GetTokenCount(Hand, Token.MediumTree), GetTokenCount(Hand, Token.LargeTree));
+            player.AppendFormat("\tShop:\n");
+            player.AppendFormat("\t\tSeed: {0}, Sml: {1}, Med: {2}, Lrg: {3}\n",
+                GetTokenCount(Shop, Token.Seed), GetTokenCount(Shop, Token.SmallTree), GetTokenCount(Shop, Token.MediumTree), GetTokenCount(Shop, Token.LargeTree));
+            player.AppendLine();
+
+            return player.ToString();
         }
     }
 }

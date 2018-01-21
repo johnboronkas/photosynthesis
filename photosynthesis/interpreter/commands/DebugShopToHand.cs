@@ -4,12 +4,20 @@
     {
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
-            gameState.Players.ForEach((player) =>
+            if (GameState.DebugMode)
             {
-                player.Hand.AddRange(player.Shop);
-            });
+                gameState.Players.ForEach((player) =>
+                {
+                    player.Hand.AddRange(player.Shop);
+                    player.Shop.Clear();
+                });
 
-            return new CommandResponse(true);
+                return new CommandResponse(true);
+            }
+            else
+            {
+                return new CommandResponse(false, "Cannot use debug commands if debug mode is not set in GameState.");
+            }
         }
     }
 }
