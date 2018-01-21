@@ -12,6 +12,6 @@ namespace photosynthesis.interpreter.commands
         /// <summary>
         /// Throws InvalidCommandException if the command provided is invalid or illegal.
         /// </summary>
-        void Perform(GameState gameState, params string[] parameters);
+        CommandResponse Perform(GameState gameState, params string[] parameters);
     }
 }

@@ -9,7 +9,7 @@ namespace photosynthesis.interpreter.commands
 {
     public class PlaceStartingTree : Command
     {
-        public void Perform(GameState gameState, params string[] parameters)
+        public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Space space;
             gameState.Board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space);
@@ -17,10 +17,11 @@ namespace photosynthesis.interpreter.commands
             if (space.ScoreValue <= 1)
             {
                 space.Set(gameState.CurrentPlayer.Team, Token.SmallTree);
+                return new CommandResponse(true);
             }
             else
             {
-                throw new InvalidCommandException("Starting trees may only be placed on spaces that have a score value of 1 or less.");
+                return new CommandResponse(false, "Starting trees may only be placed on spaces that have a score value of 1 or less.");
             }
         }
     }

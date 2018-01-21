@@ -41,6 +41,12 @@ namespace photosynthesis.state
         public void AdvanceSunPosition()
         {
             CurrentSunPosition = (SunPosition)(((int)++CurrentSunPosition) % Enum.GetNames(typeof(SunPosition)).Length);
+            UpdateShadows();
+        }
+
+        public void UpdateShadows()
+        {
+            // TODO Calculate shadows for every space.
         }
 
         public string SpacesHumanReadable()

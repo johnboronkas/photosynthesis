@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="interpreter\commands\CommandResponse.cs" />
+    <Compile Include="interpreter\commands\DebugAddLightPoints.cs" />
     <Compile Include="interpreter\commands\Players.cs" />
     <Compile Include="interpreter\commands\ShowBoard.cs" />
     <Compile Include="GameState.cs" />
@@ -52,7 +54,6 @@
     <Compile Include="interpreter\commands\Pass.cs" />
     <Compile Include="interpreter\commands\PlaceStartingTree.cs" />
     <Compile Include="interpreter\commands\ShowHex.cs" />
-    <Compile Include="interpreter\commands\InvalidCommandException.cs" />
     <Compile Include="interpreter\commands\Seed.cs" />
     <Compile Include="interpreter\commands\Upgrade.cs" />
     <Compile Include="interpreter\commands\WriteGameFile.cs" />

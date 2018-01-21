@@ -24,11 +24,17 @@ namespace photosynthesis.state
 
         public void Set(Team team, Token token)
         {
-            if (team == 0 && token != 0) throw new ArgumentException("Token placed without a team.");
-            if (team != 0 && token == 0) throw new ArgumentException("No token on space, but a team owns it.");
+            if (team == Team.None && token != Token.None) throw new ArgumentException("Token placed without a team.");
+            if (team != Team.None && token == Token.None) throw new ArgumentException("No token on space, but a team owns it.");
 
             Team = team;
             Token = token;
+        }
+
+        public void Clear()
+        {
+            Team = Team.None;
+            Token = Token.None;
         }
 
         public override string ToString()

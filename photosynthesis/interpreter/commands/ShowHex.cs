@@ -9,9 +9,10 @@ namespace photosynthesis.interpreter.commands
 {
     public class ShowHex : Command
     {
-        public void Perform(GameState gameState, params string[] parameters)
+        public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Console.WriteLine(gameState.Board.HexesHumanReadable());
+            return new CommandResponse(true);
         }
     }
 }

@@ -28,6 +28,21 @@ namespace photosynthesis.state
         public const int ShopMaxLargeTrees = 2;
         public static int[] ShopLargeTreeCost = new int[] { 4, 5 };
 
+        public static Dictionary<Token, int> ShopMaxes = new Dictionary<Token, int>()
+        {
+            { Token.Seed, ShopMaxSeeds },
+            { Token.SmallTree, ShopMaxSmallTrees },
+            { Token.MediumTree, ShopMaxMediumTrees },
+            { Token.LargeTree, ShopMaxLargeTrees },
+        };
+
+        public static Dictionary<Token, int[]> ShopCosts = new Dictionary<Token, int[]>()
+        {
+            { Token.Seed, ShopSeedCost },
+            { Token.SmallTree, ShopSmallTreeCost },
+            { Token.MediumTree, ShopMediumTreeCost },
+            { Token.LargeTree, ShopLargeTreeCost },
+        };
 
         public Team Team { get; private set; }
         public int LightPoints { get; private set; }
@@ -67,6 +82,28 @@ namespace photosynthesis.state
         public void AddLightPoints(int lightPoints)
         {
             LightPoints = Math.Min(LightPoints + lightPoints, MaxLightPoints);
+        }
+
+        public bool TrySubtractLightPoints(int lightPointCost)
+        {
+            if (LightPoints < lightPointCost)
+            {
+                return false;
+            }
+            else
+            {
+                LightPoints -= lightPointCost;
+                return true;
+            }
+        }
+
+        public void ShopAddToken(Token token)
+        {
+            int shopTokenCount = Shop.GroupBy(t => t).Select(t => t).Count();
+            if (shopTokenCount < ShopMaxes[token])
+            {
+                Shop.Add(token);
+            }
         }
 
         public override string ToString()

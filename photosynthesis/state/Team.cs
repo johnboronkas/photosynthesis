@@ -8,8 +8,8 @@ namespace photosynthesis.state
 {
     public enum Team : int
     {
-        None = 0,
-        Orange,
+        None = 9,
+        Orange = 1,
         Blue,
         Green,
         Yellow,

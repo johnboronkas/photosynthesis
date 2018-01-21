@@ -9,7 +9,10 @@ namespace photosynthesis
 {
     public class GameState
     {
-        public const int MaxRounds = 4;
+        public const bool DebugMode = true;
+        public const bool AdvancedMode = true;
+
+        public const int MaxRounds = AdvancedMode ? 4 : 3;
         public int CurrentRound { get; private set; }
 
         public List<Player> Players { get; private set; }

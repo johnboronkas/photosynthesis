@@ -19,9 +19,18 @@ namespace photosynthesis.interpreter
             {
                 var type = Type.GetType("photosynthesis.interpreter.commands." + action.First(), true, true);
                 Command instance = (Command)Activator.CreateInstance(type);
-                instance.Perform(gameState, action.ToArray());
-                gameState.GameFile.AddMove(gameState.CurrentRound + " " + gameState.Board.CurrentSunPosition + " " + gameState.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
-                return true;
+                CommandResponse response = instance.Perform(gameState, action.ToArray());
+
+                if (response.IsSuccessful)
+                {
+                    gameState.GameFile.AddMove(gameState.CurrentRound + " " + gameState.Board.CurrentSunPosition + " " + gameState.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine(response);
+                    return false;
+                }
             }
             catch (Exception e)
             {
@@ -29,8 +38,7 @@ namespace photosynthesis.interpreter
                     e is TypeLoadException || e is ArgumentException || e is FileNotFoundException ||
                     e is FileLoadException || e is BadImageFormatException || e is NotSupportedException ||
                     e is TargetInvocationException || e is MethodAccessException || e is MemberAccessException ||
-                    e is InvalidComObjectException || e is MissingMethodException || e is COMException || e is InvalidOperationException ||
-                    e is InvalidCommandException)
+                    e is InvalidComObjectException || e is MissingMethodException || e is COMException || e is InvalidOperationException)
                 {
                     Console.WriteLine(e);
                     return false;

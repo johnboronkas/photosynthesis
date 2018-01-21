@@ -8,10 +8,11 @@ namespace photosynthesis.state
 {
     public enum Token : int
     {
-        None = 0,
+        None = 9,
+        Seed = 0,
         SmallTree = 1,
         MediumTree = 2,
         LargeTree = 3,
-        Seed = 4,
+        Score = 4,
     }
 }
