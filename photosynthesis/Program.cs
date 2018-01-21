@@ -28,6 +28,7 @@ namespace photosynthesis
             }, board, gameFile);
 
             // TODO After each player places both starting trees, need to call gameState.CollectLightPoints().
+            // TODO Need specific setup function that does above and resets the turn order (dosen't use 'pass').
             
             while (true)
             {

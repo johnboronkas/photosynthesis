@@ -23,7 +23,7 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine();
             help.AppendLine("ShowBoard");
             help.AppendLine("ShowHex");
-            // TODO Add show all player states command.
+            help.AppendLine("Players");
             // TODO Add score tokens.
             help.AppendLine("WriteGameFile");
 
