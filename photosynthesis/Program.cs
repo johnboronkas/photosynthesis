@@ -14,6 +14,7 @@ namespace photosynthesis
         static void Main(string[] args)
         {
             var board = new Board();
+            var scoreTokens = new ScoreTokens();
             var gameFile = new GameFile();
             var interpreter = new CommandInterpreter();
 
@@ -23,7 +24,7 @@ namespace photosynthesis
                 new Player(Team.Blue),
                 new Player(Team.Green),
                 new Player(Team.Yellow),
-            }, board, gameFile);
+            }, board, scoreTokens, gameFile);
 
             // TODO After each player places both starting trees, need to call gameState.CollectLightPoints().
             // TODO Need specific setup function that does above and resets the turn order (dosen't use 'pass').

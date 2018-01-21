@@ -47,7 +47,7 @@ namespace photosynthesis.state
         public int LightPoints { get; private set; }
         public List<Token> Hand { get; private set; }
         public List<Token> Shop { get; private set; }
-        public int Score { get; set; }
+        public int Score { get; private set; }
 
         public Player(Team team)
         {
@@ -96,6 +96,11 @@ namespace photosynthesis.state
                 LightPoints -= lightPointCost;
                 return true;
             }
+        }
+
+        public void AddScore(int spaceScoreValue, ScoreTokens scoreTokens)
+        {
+            scoreTokens.CollectNext(spaceScoreValue);
         }
 
         public void ShopAddToken(Token token)

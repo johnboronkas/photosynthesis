@@ -28,7 +28,7 @@ namespace photosynthesis.interpreter.commands
             {
                 if (!player.TrySubtractLightPoints((int)nextToken)) { return new CommandResponse(false, "Insufficient light points."); }
 
-                // TODO Handle scoring.
+                player.AddScore(space.ScoreValue, gameState.ScoreTokens);
 
                 player.ShopAddToken(currentToken);
                 space.Clear();

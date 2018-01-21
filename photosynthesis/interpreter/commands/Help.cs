@@ -12,7 +12,7 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine("Help - Prints this help menu.");
             help.AppendLine("Exit - Exits the program.");
             // TODO Load gamefile and resume play.
-            // TODO Add setup commands.
+            // TODO Add setup commands (ie, StartGame RandomBot Human MiddleBot Human -- where bots are loaded via reflection).
             help.AppendLine("\n---- MOVES ----");
             help.AppendLine("PlaceStartingTree p q r - Places a small tree on the given cube coordinate. Can only be used on the outer rim of the board.");
             help.AppendLine("Buy tokenID - Buys a token from your shop.");
@@ -24,7 +24,6 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine("ShowHex - Prints cube coordinates (p, q, r) of every hex.");
             help.AppendLine("Players - Prints player stats for every player.");
             // TODO Load gamefile and step through it forwards (to 'watch' the game).
-            // TODO Add score tokens.
             help.AppendLine("WriteGameFile - Writes the current gamefile to disk (overwrites).");
             help.AppendLine("\n---- DEBUG ---- (below commands may only be used if debug mode is set in GameState)");
             help.AppendLine("DebugAddLightPoints - Maxes out every player's light points.");

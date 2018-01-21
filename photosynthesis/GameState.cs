@@ -16,9 +16,10 @@ namespace photosynthesis
         public int CurrentPlayerNumber { get; private set; }
         public Player CurrentPlayer { get; private set; }
         public Board Board { get; private set; }
+        public ScoreTokens ScoreTokens { get; private set; }
         public GameFile GameFile { get; private set; }
 
-        public GameState(List<Player> players, Board board, GameFile gameFile)
+        public GameState(List<Player> players, Board board, ScoreTokens scoreTokens, GameFile gameFile)
         {
             CurrentRound = 0;
             Players = players;
@@ -26,6 +27,7 @@ namespace photosynthesis
             CurrentPlayerNumber = 0;
             CurrentPlayer = Players[CurrentPlayerNumber];
             Board = board;
+            ScoreTokens = scoreTokens;
             GameFile = gameFile;
         }
 
