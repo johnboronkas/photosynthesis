@@ -12,6 +12,6 @@ namespace photosynthesis.interpreter.commands
         /// <summary>
         /// Throws InvalidCommandException if the command provided is invalid or illegal.
         /// </summary>
-        void Perform(GameFile gameFile, Board board, Player player, List<Player> players, params string[] parameters);
+        void Perform(GameFile gameFile, Board board, PlayerTracker playerTracker, params string[] parameters);
     }
 }

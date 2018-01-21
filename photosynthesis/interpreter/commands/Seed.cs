@@ -9,7 +9,7 @@ namespace photosynthesis.interpreter.commands
 {
     public class Seed : Command
     {
-        public void Perform(GameFile gameFile, Board board, Player player, List<Player> players, params string[] parameters)
+        public void Perform(GameFile gameFile, Board board, PlayerTracker playerTracker, params string[] parameters)
         {
             Console.Write("Seeding: ");
             for (int i = 0; i < parameters.Count(); i++)

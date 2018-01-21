@@ -7,11 +7,11 @@ using photosynthesis.state;
 
 namespace photosynthesis.interpreter.commands
 {
-    public class ShowHex : Command
+    public class Pass : Command
     {
         public void Perform(GameFile gameFile, Board board, PlayerTracker playerTracker, params string[] parameters)
         {
-            Console.WriteLine(board.HexesHumanReadable());
+            playerTracker.AdvanceToNextPlayer();
         }
     }
 }

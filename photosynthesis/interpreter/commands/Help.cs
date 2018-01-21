@@ -9,16 +9,21 @@ namespace photosynthesis.interpreter.commands
 {
     public class Help : Command
     {
-        public void Perform(GameFile gameFile, Board board, Player player, List<Player> players, params string[] parameters)
+        public void Perform(GameFile gameFile, Board board, PlayerTracker playerTracker, params string[] parameters)
         {
             StringBuilder help = new StringBuilder();
 
-            help.AppendLine("help");
-            help.AppendLine("showhex");
-            help.AppendLine("buy tokenID");
-            help.AppendLine("seed srcP srcQ srcR dstP dstQ dstR");
-            help.AppendLine("upgrade p q r");
-            help.AppendLine("writegamefile");
+            help.AppendLine("Help");
+            help.AppendLine();
+            help.AppendLine("PlaceStartingTree p q r");
+            help.AppendLine("Buy tokenID");
+            help.AppendLine("Seed srcP srcQ srcR dstP dstQ dstR");
+            help.AppendLine("Upgrade p q r");
+            help.AppendLine("Pass");
+            help.AppendLine();
+            help.AppendLine("ShowBoard");
+            help.AppendLine("ShowHex");
+            help.AppendLine("WriteGameFile");
 
             Console.WriteLine(help.ToString());
         }

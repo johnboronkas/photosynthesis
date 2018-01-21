@@ -13,14 +13,14 @@ namespace photosynthesis.interpreter
 {
     public class CommandInterpreter
     {
-        public bool DoAction(GameFile gameFile, Board board, Player player, List<Player> players, List<string> action)
+        public bool DoAction(GameFile gameFile, Board board, PlayerTracker playerTracker, List<string> action)
         {
             try
             {
                 var type = Type.GetType("photosynthesis.interpreter.commands." + action.First(), true, true);
                 Command instance = (Command)Activator.CreateInstance(type);
-                instance.Perform(gameFile, board, player, players, action.ToArray());
-                gameFile.AddMove((int)player.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
+                instance.Perform(gameFile, board, playerTracker, action.ToArray());
+                gameFile.AddMove(playerTracker.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
                 return true;
             }
             catch (Exception e)
