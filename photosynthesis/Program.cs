@@ -15,25 +15,22 @@ namespace photosynthesis
     {
         static void Main(string[] args)
         {
-            var playerTracker = new PlayerTracker(new List<Player>()
+            var board = new Board();
+            var gameFile = new GameFile();
+            var interpreter = new CommandInterpreter();
+
+            var gameState = new GameState(new List<Player>()
             {
                 new Player(Team.Orange),
                 new Player(Team.Blue),
                 new Player(Team.Green),
                 new Player(Team.Yellow),
-            });
-
-            var board = new Board();
-            var gameFile = new GameFile();
-            var interpreter = new CommandInterpreter();
-
-            var currentPlayerNum = 0;
+            }, board, gameFile);
+            
             while (true)
             {
-                while (!interpreter.DoAction(gameFile, board, playerTracker, GetUserInput()));
+                while (!interpreter.DoAction(gameState, GetUserInput()));
             }
-
-            Console.ReadLine();
         }
 
         static List<string> GetUserInput()

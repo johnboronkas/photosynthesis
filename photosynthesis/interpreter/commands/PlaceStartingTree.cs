@@ -9,14 +9,14 @@ namespace photosynthesis.interpreter.commands
 {
     public class PlaceStartingTree : Command
     {
-        public void Perform(GameFile gameFile, Board board, PlayerTracker playerTracker, params string[] parameters)
+        public void Perform(GameState gameState, params string[] parameters)
         {
             Space space;
-            board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space);
+            gameState.Board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space);
             
             if (space.ScoreValue <= 1)
             {
-                space.Set(playerTracker.CurrentPlayer.Team, Token.SmallTree);
+                space.Set(gameState.CurrentPlayer.Team, Token.SmallTree);
             }
             else
             {

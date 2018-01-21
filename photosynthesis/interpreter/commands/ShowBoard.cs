@@ -9,9 +9,9 @@ namespace photosynthesis.interpreter.commands
 {
     public class ShowBoard : Command
     {
-        public void Perform(GameFile gameFile, Board board, PlayerTracker playerTracker, params string[] parameters)
+        public void Perform(GameState gameState, params string[] parameters)
         {
-            Console.WriteLine(board.SpacesHumanReadable());
+            Console.WriteLine(gameState.Board.SpacesHumanReadable());
         }
     }
 }

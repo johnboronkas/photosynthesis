@@ -15,6 +15,7 @@ namespace photosynthesis.state
         private const int BoardRadius = 3;
 
         public Dictionary<Hex, Space> State { get; private set; }
+        public SunPosition CurrentSunPosition { get; private set; }
 
         /// <summary>
         /// Creates an empty board with the sun positioned to the North (top-right) of the board.
@@ -33,11 +34,20 @@ namespace photosynthesis.state
                     State.Add(hex, new Space(hex, scoreValue));
                 }
             }
+
+            CurrentSunPosition = SunPosition.North;
+        }
+
+        public void AdvanceSunPosition()
+        {
+            CurrentSunPosition = (SunPosition)(((int)++CurrentSunPosition) % Enum.GetNames(typeof(SunPosition)).Length);
         }
 
         public string SpacesHumanReadable()
         {
             StringBuilder board = new StringBuilder();
+            board.AppendLine("Sun is to the " + CurrentSunPosition);
+
             for (int q = -BoardRadius; q <= BoardRadius; q++)
             {
                 int r1 = Math.Max(-BoardRadius, -q - BoardRadius);

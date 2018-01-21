@@ -9,9 +9,9 @@ namespace photosynthesis.interpreter.commands
 {
     public class Upgrade : Command
     {
-        public void Perform(GameFile gameFile, Board board, PlayerTracker playerTracker, params string[] parameters)
+        public void Perform(GameState gameState, params string[] parameters)
         {
-            
+            // TODO Upgrade.
         }
     }
 }

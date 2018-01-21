@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="interpreter\commands\ShowBoard.cs" />
-    <Compile Include="PlayerTracker.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="interpreter\commands\Command.cs" />
     <Compile Include="interpreter\commands\Buy.cs" />
     <Compile Include="interpreter\CommandInterpreter.cs" />

@@ -9,7 +9,7 @@ namespace photosynthesis.interpreter.commands
 {
     public class Help : Command
     {
-        public void Perform(GameFile gameFile, Board board, PlayerTracker playerTracker, params string[] parameters)
+        public void Perform(GameState gameState, params string[] parameters)
         {
             StringBuilder help = new StringBuilder();
 
@@ -23,6 +23,7 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine();
             help.AppendLine("ShowBoard");
             help.AppendLine("ShowHex");
+            // TODO Add show all player states command.
             help.AppendLine("WriteGameFile");
 
             Console.WriteLine(help.ToString());

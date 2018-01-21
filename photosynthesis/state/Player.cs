@@ -64,9 +64,11 @@ namespace photosynthesis.state
             };
         }
 
-        public void CollectLightPoints(int lightPoints)
+        public void AddLightPoints(int lightPoints)
         {
             LightPoints = Math.Min(LightPoints + lightPoints, MaxLightPoints);
         }
+
+        // TODO Add ToString() override.
     }
 }
