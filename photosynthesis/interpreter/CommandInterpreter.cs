@@ -21,7 +21,7 @@ namespace photosynthesis.interpreter
 
                 if (response.IsSuccessful)
                 {
-                    gameState.GameFile.AddMove(gameState.CurrentRound + " " + gameState.Board.CurrentSunPosition + " " + gameState.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
+                    gameState.GameFile.AddMove(gameState.CurrentRound + " " + gameState.Board.SunDirection + " " + gameState.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
                     return true;
                 }
                 else

@@ -73,21 +73,21 @@ namespace photosynthesis.state
             return Length(h1 - h2);
         }
 
-        private static List<Hex> Directions = new List<Hex> { new Hex(1, 0, -1), new Hex(1, -1, 0), new Hex(0, -1, 1),
-                                                              new Hex(-1, 0, 1), new Hex(-1, 1, 0), new Hex(0, 1, -1) };
-
-        /// <summary>
-        /// Top-right is 0, bottom-right is 1, and so on (clockwise).
-        /// </summary>
-        private static Hex Direction(int direction)
+        private static List<Hex> Directions = new List<Hex> {
+            new Hex(-1, 1, 0),
+            new Hex(0, 1, -1),
+            new Hex(1, 0, -1),
+            new Hex(1, -1, 0),
+            new Hex(0, -1, 1),
+            new Hex(-1, 0, 1),
+        };
+        
+        private static Hex Direction(Direction direction)
         {
-            return Directions[direction];
+            return Directions[(int)direction];
         }
-
-        /// <summary>
-        /// Top-right is 0, bottom-right is 1, and so on (clockwise).
-        /// </summary>
-        public static Hex Neighbor(Hex hex, int direction)
+        
+        public static Hex Neighbor(Hex hex, Direction direction)
         {
             return hex + Direction(direction);
         }

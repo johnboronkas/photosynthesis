@@ -48,7 +48,7 @@ namespace photosynthesis
                 PlayerNumberFirstToMove = ++CurrentPlayerNumber % Players.Count;
                 Board.AdvanceSunPosition();
 
-                if (Board.CurrentSunPosition == SunPosition.North)
+                if (Board.SunDirection == Direction.North)
                 {
                     CurrentRound++;
 

@@ -64,13 +64,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="state\Board.cs" />
     <Compile Include="GameFile.cs" />
+    <Compile Include="state\Direction.cs" />
     <Compile Include="state\Player.cs" />
     <Compile Include="state\ScoreTokens.cs" />
     <Compile Include="state\Space.cs" />
     <Compile Include="state\Team.cs" />
     <Compile Include="state\Token.cs" />
     <Compile Include="state\Hex.cs" />
-    <Compile Include="state\SunPosition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

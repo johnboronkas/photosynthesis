@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace photosynthesis.state
 {
@@ -13,7 +14,7 @@ namespace photosynthesis.state
         private const int BoardRadius = 3;
 
         public Dictionary<Hex, Space> State { get; private set; }
-        public SunPosition CurrentSunPosition { get; private set; }
+        public Direction SunDirection { get; private set; }
 
         /// <summary>
         /// Creates an empty board with the sun positioned to the North (top-right) of the board.
@@ -33,24 +34,64 @@ namespace photosynthesis.state
                 }
             }
 
-            CurrentSunPosition = SunPosition.North;
+            SunDirection = Direction.North;
         }
 
         public void AdvanceSunPosition()
         {
-            CurrentSunPosition = (SunPosition)(((int)++CurrentSunPosition) % Enum.GetNames(typeof(SunPosition)).Length);
+            SunDirection = (Direction)(((int)++SunDirection) % Enum.GetNames(typeof(Direction)).Length);
             UpdateShadows();
         }
 
         public void UpdateShadows()
         {
-            // TODO Calculate shadows for every space.
+            switch (SunDirection)
+            {
+                case Direction.North:
+                    State.Values.Where(s => s.Hex.Q == -BoardRadius || s.Hex.R == BoardRadius)
+                        .ToList().ForEach((space) => { CastLight(space, GetOppositeDirection(SunDirection)); });
+                    break;
+                case Direction.NorthEast:
+                    State.Values.Where(s => s.Hex.S == -BoardRadius || s.Hex.R == BoardRadius)
+                        .ToList().ForEach((space) => { CastLight(space, GetOppositeDirection(SunDirection)); });
+                    break;
+                case Direction.SouthEast:
+                    State.Values.Where(s => s.Hex.S == -BoardRadius || s.Hex.Q == BoardRadius)
+                        .ToList().ForEach((space) => { CastLight(space, GetOppositeDirection(SunDirection)); });
+                    break;
+                case Direction.South:
+                    State.Values.Where(s => s.Hex.R == -BoardRadius || s.Hex.Q == BoardRadius)
+                        .ToList().ForEach((space) => { CastLight(space, GetOppositeDirection(SunDirection)); });
+                    break;
+                case Direction.SouthWest:
+                    State.Values.Where(s => s.Hex.R == -BoardRadius || s.Hex.S == BoardRadius)
+                        .ToList().ForEach((space) => { CastLight(space, GetOppositeDirection(SunDirection)); });
+                    break;
+                case Direction.NorthWest:
+                    State.Values.Where(s => s.Hex.Q == -BoardRadius || s.Hex.S == BoardRadius)
+                        .ToList().ForEach((space) => { CastLight(space, GetOppositeDirection(SunDirection)); });
+                    break;
+            }
+        }
+
+        private Direction GetOppositeDirection(Direction direction)
+        {
+            int numDirections = Enum.GetNames(typeof(Direction)).Length;
+            return (Direction)(((int)SunDirection + numDirections / 2) % numDirections);
+        }
+
+        private void CastLight(Space space, Direction direction)
+        {
+            // TODO PICKUP Cast light/shadow logic.
+            Hex nextHex = Hex.Neighbor(space.Hex, Direction.SouthWest);
+            if (nextHex == null) return;
+            Space nextSpace = State[nextHex];
         }
 
         public string SpacesHumanReadable()
         {
             StringBuilder board = new StringBuilder();
-            board.AppendLine(string.Format("Sun is to the {0}.", CurrentSunPosition));
+            board.AppendLine(string.Format("Sun is to the {0}.", SunDirection));
 
             for (int q = -BoardRadius; q <= BoardRadius; q++)
             {
@@ -102,7 +143,7 @@ namespace photosynthesis.state
         public string ShadowsHumanReadable()
         {
             StringBuilder board = new StringBuilder();
-            board.AppendLine(string.Format("Sun is to the {0}.", CurrentSunPosition));
+            board.AppendLine(string.Format("Sun is to the {0}.", SunDirection));
 
             for (int q = -BoardRadius; q <= BoardRadius; q++)
             {
