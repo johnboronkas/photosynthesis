@@ -99,6 +99,34 @@ namespace photosynthesis.state
             return board.ToString();
         }
 
+        public string ShadowsHumanReadable()
+        {
+            StringBuilder board = new StringBuilder();
+            board.AppendLine(string.Format("Sun is to the {0}.", CurrentSunPosition));
+
+            for (int q = -BoardRadius; q <= BoardRadius; q++)
+            {
+                int r1 = Math.Max(-BoardRadius, -q - BoardRadius);
+                int r2 = Math.Min(BoardRadius, -q + BoardRadius);
+                board.Append("".PadLeft(Math.Abs(q) * 2));
+
+                for (int r = r1; r <= r2; r++)
+                {
+                    var hex = new Hex(q, r, -q - r);
+                    Space space;
+                    State.TryGetValue(hex, out space);
+
+                    string s = string.Format("{0}{1}", space.IsLit ? "O" : "X", space.Token == Token.None ? "-" : ((int)space.Token).ToString());
+                    board.Append(s + "  ");
+                }
+
+                board.AppendLine();
+                board.AppendLine();
+            }
+
+            return board.ToString();
+        }
+
         public override string ToString()
         {
             return SpacesHumanReadable();

@@ -14,14 +14,15 @@ namespace photosynthesis.interpreter.commands
             // TODO Load gamefile and resume play.
             // TODO Add setup commands (ie, StartGame RandomBot Human MiddleBot Human -- where bots are loaded via reflection).
             help.AppendLine("\n---- MOVES ----");
-            help.AppendLine("PlaceStartingTree p q r - Places a small tree on the given cube coordinate. Can only be used on the outer rim of the board.");
+            help.AppendLine("PlaceStartingTree q r s - Places a small tree on the given cube coordinate. Can only be used on the outer rim of the board.");
             help.AppendLine("Buy tokenID - Buys a token from your shop.");
-            help.AppendLine("Seed srcP srcQ srcR dstP dstQ dstR - Shoots a seed from the source cube coordinate to the destination cube coordinate.");
-            help.AppendLine("Upgrade p q r - Upgrades the given cube coordinate.");
+            help.AppendLine("Seed srcQ srcR srcS dstQ dstR dstS - Shoots a seed from the source cube coordinate to the destination cube coordinate.");
+            help.AppendLine("Upgrade q r s - Upgrades the given cube coordinate.");
             help.AppendLine("Pass - End your turn and advance the game.");
             help.AppendLine("\n---- VISUAL ----");
             help.AppendLine("ShowBoard - Prints TeamNum and Token, where '--' is none.");
-            help.AppendLine("ShowHex - Prints cube coordinates (p, q, r) of every hex.");
+            help.AppendLine("ShowHex - Prints cube coordinates (q, r, s) of every hex.");
+            help.AppendLine("ShowShadow - Prints X if shaded, O if lit, and the tokenID for each hex.");
             help.AppendLine("Players - Prints player stats for every player.");
             // TODO Load gamefile and step through it forwards (to 'watch' the game).
             help.AppendLine("WriteGameFile - Writes the current gamefile to disk (overwrites).");
