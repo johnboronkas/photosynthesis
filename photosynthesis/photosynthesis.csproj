@@ -64,6 +64,7 @@
     <Compile Include="state\Board.cs" />
     <Compile Include="GameFile.cs" />
     <Compile Include="state\Player.cs" />
+    <Compile Include="state\ScoreTokens.cs" />
     <Compile Include="state\Space.cs" />
     <Compile Include="state\Team.cs" />
     <Compile Include="state\Token.cs" />
