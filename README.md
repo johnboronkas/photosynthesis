@@ -14,7 +14,7 @@ Can set debug mode and advanced rules in `GameState`.
 A list of moves from an initial gamestate that can be used to save, restore, or replay a game. Much like [chess notation](https://en.wikipedia.org/wiki/Chess_notation).
 
 In the form:
-`round sunPosition player action`
+`player action`
 
 # game board
 A hex-grid representation of the game board. Using the "pointy topped" version with cube coordinates.
