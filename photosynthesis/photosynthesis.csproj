@@ -58,7 +58,7 @@
     <Compile Include="interpreter\commands\ShowHex.cs" />
     <Compile Include="interpreter\commands\Seed.cs" />
     <Compile Include="interpreter\commands\ShowShadow.cs" />
-    <Compile Include="interpreter\commands\Upgrade.cs" />
+    <Compile Include="interpreter\commands\Grow.cs" />
     <Compile Include="interpreter\commands\WriteGameFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

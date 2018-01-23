@@ -100,7 +100,7 @@ namespace photosynthesis.state
 
         public void AddScore(int spaceScoreValue, ScoreTokens scoreTokens)
         {
-            scoreTokens.CollectNext(spaceScoreValue);
+            Score += scoreTokens.CollectNext(spaceScoreValue);
         }
 
         public void ShopAddToken(Token token)

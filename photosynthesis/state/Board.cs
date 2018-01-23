@@ -83,27 +83,29 @@ namespace photosynthesis.state
         private void CastLight(Space space, Direction direction)
         {
             var shadowCount = 0;
+            Space currentSpace = space;
 
             while (true)
             {
-                Hex nextHex = Hex.Neighbor(space.Hex, direction);
-                if (nextHex == null) return;
-                Space nextSpace = State[nextHex];
-
                 if (shadowCount > 0)
                 {
-                    space.IsLit = false;
+                    currentSpace.IsLit = false;
                     shadowCount--;
                 }
                 else
                 {
-                    space.IsLit = true;
+                    currentSpace.IsLit = true;
                 }
 
-                if (space.Token != Token.None)
+                if (currentSpace.Token != Token.None)
                 {
-                    shadowCount = Math.Max((int)space.Token, shadowCount);
+                    shadowCount = Math.Max((int)currentSpace.Token, shadowCount);
                 }
+
+                Hex nextHex = Hex.Neighbor(currentSpace.Hex, direction);
+                Space nextSpace;
+                if (!State.TryGetValue(nextHex, out nextSpace)) return;
+                currentSpace = nextSpace;
             }
         }
 
