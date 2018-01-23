@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace photosynthesis.interpreter.commands
 {
-    public class Upgrade : Command
+    public class Grow : Command
     {
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {

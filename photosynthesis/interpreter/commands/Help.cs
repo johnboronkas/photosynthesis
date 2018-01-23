@@ -17,7 +17,7 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine("PlaceStartingTree q r s - Places a small tree on the given cube coordinate. Can only be used on the outer rim of the board.");
             help.AppendLine("Buy tokenID - Buys a token from your shop.");
             help.AppendLine("Seed srcQ srcR srcS dstQ dstR dstS - Shoots a seed from the source cube coordinate to the destination cube coordinate.");
-            help.AppendLine("Upgrade q r s - Upgrades the given cube coordinate.");
+            help.AppendLine("Grow q r s - Grows the given cube coordinate.");
             help.AppendLine("Pass - End your turn and advance the game.");
             help.AppendLine("\n---- VISUAL ----");
             help.AppendLine("ShowBoard - Prints TeamNum and Token, where '--' is none.");
