@@ -82,10 +82,29 @@ namespace photosynthesis.state
 
         private void CastLight(Space space, Direction direction)
         {
-            // TODO PICKUP Cast light/shadow logic.
-            Hex nextHex = Hex.Neighbor(space.Hex, Direction.SouthWest);
-            if (nextHex == null) return;
-            Space nextSpace = State[nextHex];
+            var shadowCount = 0;
+
+            while (true)
+            {
+                Hex nextHex = Hex.Neighbor(space.Hex, direction);
+                if (nextHex == null) return;
+                Space nextSpace = State[nextHex];
+
+                if (shadowCount > 0)
+                {
+                    space.IsLit = false;
+                    shadowCount--;
+                }
+                else
+                {
+                    space.IsLit = true;
+                }
+
+                if (space.Token != Token.None)
+                {
+                    shadowCount = Math.Max((int)space.Token, shadowCount);
+                }
+            }
         }
 
         public string SpacesHumanReadable()
