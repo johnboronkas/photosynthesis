@@ -41,6 +41,8 @@ namespace photosynthesis
 
         public void EndTurn()
         {
+            Players.ForEach((player) => { player.UsedSpaces.Clear(); });
+
             CurrentPlayerNumber = ++CurrentPlayerNumber % Players.Count;
             
             if (CurrentPlayerNumber == PlayerNumberFirstToMove)

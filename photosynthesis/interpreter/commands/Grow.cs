@@ -14,11 +14,12 @@ namespace photosynthesis.interpreter.commands
                 return new CommandResponse(false, "Invalid hex. Use 'ShowHex' to view cube coordinates.");
             }
 
-            if (space.Team != player.Team) { return new CommandResponse(false, "Cannot upgrade unowned hex."); }
+            if (space.Team != player.Team) return new CommandResponse(false, "Cannot upgrade unowned hex.");
+            if (player.UsedSpaces.Contains(space)) return new CommandResponse(false, "Cannot use the same hex more than once a turn.");
 
             if (GameState.AdvancedMode)
             {
-                if (!space.IsLit) { return new CommandResponse(false, "Cannot use an unlit hex."); }
+                if (!space.IsLit) return new CommandResponse(false, "Cannot use an unlit hex.");
             }
 
             Token currentToken = space.Token;
@@ -26,7 +27,7 @@ namespace photosynthesis.interpreter.commands
 
             if (nextToken == Token.Score)
             {
-                if (!player.TrySubtractLightPoints((int)nextToken)) { return new CommandResponse(false, "Insufficient light points."); }
+                if (!player.TrySubtractLightPoints((int)nextToken)) return new CommandResponse(false, "Insufficient light points.");
 
                 player.AddScore(space.ScoreValue, gameState.ScoreTokens);
 
@@ -36,11 +37,12 @@ namespace photosynthesis.interpreter.commands
                 return new CommandResponse(true);
             }
 
-            if (!player.Hand.Contains(nextToken)) { return new CommandResponse(false, "Upgraded token missing from hand. Must buy one from the shop first."); }
-            if (!player.TrySubtractLightPoints((int)nextToken)) { return new CommandResponse(false, "Insufficient light points."); }
+            if (!player.Hand.Contains(nextToken)) return new CommandResponse(false, "Upgraded token missing from hand. Must buy one from the shop first.");
+            if (!player.TrySubtractLightPoints((int)nextToken)) return new CommandResponse(false, "Insufficient light points.");
 
             player.Hand.Remove(nextToken);
             space.Set(player.Team, nextToken);
+            player.UsedSpaces.Add(space);
             player.ShopAddToken(currentToken);
 
             gameState.Board.UpdateShadows();

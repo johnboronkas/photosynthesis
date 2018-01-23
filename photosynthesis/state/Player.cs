@@ -48,6 +48,7 @@ namespace photosynthesis.state
         public List<Token> Hand { get; private set; }
         public List<Token> Shop { get; private set; }
         public int Score { get; private set; }
+        public List<Space> UsedSpaces { get; private set; }
 
         public Player(Team team)
         {
@@ -78,6 +79,7 @@ namespace photosynthesis.state
                 Token.LargeTree,
             };
             Score = 0;
+            UsedSpaces = new List<Space>();
         }
 
         public void AddLightPoints(int lightPoints)
