@@ -16,16 +16,16 @@ namespace photosynthesis.state
         public const int UpgradeLargeTreeCost = 4;
 
         public const int ShopMaxSeeds = 4;
-        public static int[] ShopSeedCost = new int[] { 1, 1, 2, 2 };
+        public static int[] ShopSeedCost = new int[] { 2, 2, 1, 1 };
 
         public const int ShopMaxSmallTrees = 4;
-        public static int[] ShopSmallTreeCost = new int[] { 2, 2, 3, 3 };
+        public static int[] ShopSmallTreeCost = new int[] { 3, 3, 2, 2 };
 
         public const int ShopMaxMediumTrees = 3;
-        public static int[] ShopMediumTreeCost = new int[] { 3, 3, 4 };
+        public static int[] ShopMediumTreeCost = new int[] { 4, 3, 3 };
 
         public const int ShopMaxLargeTrees = 2;
-        public static int[] ShopLargeTreeCost = new int[] { 4, 5 };
+        public static int[] ShopLargeTreeCost = new int[] { 5, 4 };
 
         public static Dictionary<Token, int> ShopMaxes = new Dictionary<Token, int>()
         {
@@ -117,6 +117,17 @@ namespace photosynthesis.state
         public int GetTokenCount(List<Token> tokens, Token tokenToCount)
         {
             return tokens.Where(t => t == tokenToCount).Count();
+        }
+
+        /// <summary>
+        /// Returns null if there are no more tokens of the provided type in the shop.
+        /// </summary>
+        public int? GetTokenCost(Token token)
+        {
+            int shopTokenCount = GetTokenCount(Shop, token);
+            if (shopTokenCount <= 0) return null;
+
+            return ShopCosts[token][shopTokenCount - 1];
         }
 
         public override string ToString()

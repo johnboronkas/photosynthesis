@@ -15,7 +15,7 @@ namespace photosynthesis.interpreter.commands
             // TODO Add setup commands (ie, StartGame RandomBot Human MiddleBot Human -- where bots are loaded via reflection).
             help.AppendLine("\n---- MOVES ----");
             help.AppendLine("PlaceStartingTree q r s - Places a small tree on the given cube coordinate. Can only be used on the outer rim of the board.");
-            help.AppendLine("Buy tokenID - Buys a token from your shop.");
+            help.AppendLine("Buy token - Buys a token from your shop (seed, smalltree, mediumtree, largetree).");
             help.AppendLine("Seed srcQ srcR srcS dstQ dstR dstS - Shoots a seed from the source cube coordinate to the destination cube coordinate.");
             help.AppendLine("Grow q r s - Grows the given cube coordinate.");
             help.AppendLine("Pass - End your turn and advance the game.");

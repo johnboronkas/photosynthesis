@@ -37,7 +37,7 @@ namespace photosynthesis.interpreter
                     e is FileLoadException || e is BadImageFormatException || e is NotSupportedException ||
                     e is TargetInvocationException || e is MethodAccessException || e is MemberAccessException ||
                     e is InvalidComObjectException || e is MissingMethodException || e is COMException || e is InvalidOperationException ||
-                    e is NullReferenceException)
+                    e is NullReferenceException || e is IndexOutOfRangeException)
                 {
                     Console.WriteLine(e);
                     return false;
