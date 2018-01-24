@@ -105,6 +105,11 @@ namespace photosynthesis.state
             Score += scoreTokens.CollectNext(spaceScoreValue);
         }
 
+        public int GetCurrentFinalScore()
+        {
+            return Score + (LightPoints / 3);
+        }
+
         public void ShopAddToken(Token token)
         {
             int shopTokenCount = GetTokenCount(Shop, token);

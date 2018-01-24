@@ -1,5 +1,8 @@
 ﻿using photosynthesis.state;
+using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace photosynthesis
 {
@@ -83,7 +86,13 @@ namespace photosynthesis
 
         public void EndOfGame()
         {
-            // TODO Tally score.
+            List<Player> finalPlacings = Players.OrderByDescending((player) => player.GetCurrentFinalScore()).ToList();
+            var sb = new StringBuilder();
+            finalPlacings.ForEach((player) => sb.AppendFormat("{0}: {1}\n", player.Team, player.GetCurrentFinalScore()));
+
+            string scores = sb.ToString();
+            Console.WriteLine(scores);
+            GameFile.AddMove(scores);
         }
     }
 }
