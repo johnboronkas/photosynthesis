@@ -5,8 +5,6 @@ namespace photosynthesis.interpreter.commands
 {
     public class Seed : Command
     {
-        private const int SeedCost = 1;
-
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Player player = gameState.CurrentPlayer;
@@ -36,7 +34,7 @@ namespace photosynthesis.interpreter.commands
             }
 
             if (spaceTo.Token != Token.None) return new CommandResponse(false, "Destination hex not empty.");
-            if (!player.TrySubtractLightPoints(SeedCost)) return new CommandResponse(false, "Insufficient light points.");
+            if (!player.TrySubtractLightPoints(Player.ShootSeedCost)) return new CommandResponse(false, "Insufficient light points.");
 
             player.Hand.Remove(Token.Seed);
             spaceTo.Set(player.Team, Token.Seed);
