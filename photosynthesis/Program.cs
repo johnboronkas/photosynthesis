@@ -37,7 +37,10 @@ namespace photosynthesis
 
         static List<string> GetUserInput()
         {
-            Console.Write("> ");
+            var prompt = "$ ";
+            if (GameState.DebugMode) prompt = "# ";
+
+            Console.Write(prompt);
             var input = Console.ReadLine();
             return input.Split(' ').ToList();
         }
