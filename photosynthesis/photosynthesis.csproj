@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="interpreter\commands\CommandResponse.cs" />
+    <Compile Include="interpreter\CommandState.cs" />
     <Compile Include="interpreter\commands\DebugAddLightPoints.cs" />
     <Compile Include="interpreter\commands\DebugShopToHand.cs" />
     <Compile Include="interpreter\commands\Exit.cs" />

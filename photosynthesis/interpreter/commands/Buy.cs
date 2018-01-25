@@ -9,16 +9,16 @@ namespace photosynthesis.interpreter.commands
         {
             string tokenInput = parameters[1];
             Token tokenToBuy;
-            if (!Enum.TryParse(tokenInput, true, out tokenToBuy)) return new CommandResponse(false, "Token to buy must be one of: seed, smalltree, mediumtree, or largetree.");
+            if (!Enum.TryParse(tokenInput, true, out tokenToBuy)) return new CommandResponse(CommandState.Failure, "Token to buy must be one of: seed, smalltree, mediumtree, or largetree.");
 
             Player player = gameState.CurrentPlayer;
             int? tokenCost = player.GetTokenCost(tokenToBuy);
-            if (!tokenCost.HasValue) return new CommandResponse(false, "Token to buy missing from the shop. Nothing to buy.");
+            if (!tokenCost.HasValue) return new CommandResponse(CommandState.Failure, "Token to buy missing from the shop. Nothing to buy.");
 
-            if (!player.TrySubtractLightPoints(tokenCost.Value)) return new CommandResponse(false, "Insufficient light points.");
+            if (!player.TrySubtractLightPoints(tokenCost.Value)) return new CommandResponse(CommandState.Failure, "Insufficient light points.");
             player.Shop.Remove(tokenToBuy);
             player.Hand.Add(tokenToBuy);
-            return new CommandResponse(true);
+            return new CommandResponse(CommandState.GameStateUpdated);
         }
     }
 }

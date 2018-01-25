@@ -5,7 +5,7 @@
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             gameState.EndTurn();
-            return new CommandResponse(true);
+            return new CommandResponse(CommandState.GameStateUpdated);
         }
     }
 }

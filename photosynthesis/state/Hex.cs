@@ -40,7 +40,7 @@ namespace photosynthesis.state
 
         public override string ToString()
         {
-            return string.Format("({0}, {1}, {2})", Q, R, S);
+            return string.Format("({0} {1} {2})", Q, R, S);
         }
 
         public static Hex Zero()

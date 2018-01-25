@@ -2,18 +2,18 @@
 {
     public class CommandResponse
     {
-        public bool IsSuccessful { get; private set; }
+        public CommandState State { get; private set; }
         public string FailureReason { get; private set; }
 
-        public CommandResponse(bool isSuccessful, string failureReason = "")
+        public CommandResponse(CommandState state, string failureReason = "")
         {
-            IsSuccessful = isSuccessful;
+            State = state;
             FailureReason = failureReason;
         }
 
         public override string ToString()
         {
-            return IsSuccessful ? "Command Successful" : "Error: " + FailureReason;
+            return State != CommandState.Failure ? "Command Successful" : "Error: " + FailureReason;
         }
     }
 }

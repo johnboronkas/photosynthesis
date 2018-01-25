@@ -13,11 +13,11 @@ namespace photosynthesis.interpreter.commands
                     player.AddLightPoints(Player.MaxLightPoints);
                 });
 
-                return new CommandResponse(true);
+                return new CommandResponse(CommandState.GameStateUpdated);
             }
             else
             {
-                return new CommandResponse(false, "Cannot use debug commands if debug mode is not set in GameState.");
+                return new CommandResponse(CommandState.Failure, "Cannot use debug commands if debug mode is not set in GameState.");
             }
         }
     }

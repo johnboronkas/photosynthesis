@@ -7,7 +7,7 @@ namespace photosynthesis.interpreter.commands
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Console.WriteLine(gameState.Board.ShadowsHumanReadable());
-            return new CommandResponse(true);
+            return new CommandResponse(CommandState.Successful);
         }
     }
 }

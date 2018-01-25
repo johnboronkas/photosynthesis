@@ -11,7 +11,7 @@ namespace photosynthesis.interpreter.commands
                 Console.WriteLine(player);
             });
 
-            return new CommandResponse(true);
+            return new CommandResponse(CommandState.Successful);
         }
     }
 }

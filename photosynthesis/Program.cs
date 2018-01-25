@@ -18,6 +18,8 @@ namespace photosynthesis
             var gameFile = new GameFile();
             var interpreter = new CommandInterpreter();
 
+            // TODO Add gamesetup commands.
+
             var gameState = new GameState(new List<Player>()
             {
                 new Player(Team.Orange),
@@ -26,13 +28,37 @@ namespace photosynthesis
                 new Player(Team.Yellow),
             }, board, scoreTokens, gameFile);
 
-            // TODO After each player places both starting trees, need to call gameState.CollectLightPoints().
-            // TODO Need specific setup function that does above and resets the turn order (dosen't use 'pass').
-            
+            if (GameState.HumanFriendlyConsole) Console.WriteLine("\nBegin game setup.");
+            DoInitialSetup(gameState, interpreter);
+
+            if (GameState.HumanFriendlyConsole) Console.WriteLine("\nThe game begins.");
             while (true)
             {
-                while (!interpreter.DoAction(gameState, GetUserInput()));
+                if (GameState.HumanFriendlyConsole) Console.WriteLine(string.Format("\nIt's {0}'s turn.", gameState.CurrentPlayer.Team));
+                while (interpreter.DoAction(gameState, GetUserInput()) == CommandState.Failure);
             }
+        }
+
+        static void DoInitialSetup(GameState gameState, CommandInterpreter interpreter)
+        {
+            int numPlayers = gameState.Players.Count;
+            for (int i = 0; i < numPlayers; i++)
+            {
+                gameState.SetCurrentPlayer(i);
+                if (GameState.HumanFriendlyConsole) Console.WriteLine(string.Format("\nIt's {0}'s turn.", gameState.CurrentPlayer.Team));
+                while (interpreter.DoAction(gameState, GetUserInput()) != CommandState.GameStateUpdated);
+            }
+
+            for (int i = numPlayers - 1; i >= 0; i--)
+            {
+                gameState.SetCurrentPlayer(i);
+                if (GameState.HumanFriendlyConsole) Console.WriteLine(string.Format("\nIt's {0}'s turn.", gameState.CurrentPlayer.Team));
+                while (interpreter.DoAction(gameState, GetUserInput()) != CommandState.GameStateUpdated);
+            }
+
+            gameState.CollectLightPoints();
+            gameState.SetCurrentPlayer(0);
+            gameState.InitMode = false;
         }
 
         static List<string> GetUserInput()

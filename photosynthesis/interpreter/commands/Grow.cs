@@ -11,15 +11,15 @@ namespace photosynthesis.interpreter.commands
             Space space;
             if (!gameState.Board.State.TryGetValue(CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList()), out space))
             {
-                return new CommandResponse(false, "Invalid hex. Use 'ShowHex' to view cube coordinates.");
+                return new CommandResponse(CommandState.Failure, "Invalid hex. Use 'ShowHex' to view cube coordinates.");
             }
 
-            if (space.Team != player.Team) return new CommandResponse(false, "Cannot upgrade unowned hex.");
-            if (player.UsedSpaces.Contains(space)) return new CommandResponse(false, "Cannot use the same hex more than once a turn.");
+            if (space.Team != player.Team) return new CommandResponse(CommandState.Failure, "Cannot upgrade unowned hex.");
+            if (player.UsedSpaces.Contains(space)) return new CommandResponse(CommandState.Failure, "Cannot use the same hex more than once a turn.");
 
             if (GameState.AdvancedMode)
             {
-                if (!space.IsLit) return new CommandResponse(false, "Cannot use an unlit hex.");
+                if (!space.IsLit) return new CommandResponse(CommandState.Failure, "Cannot use an unlit hex.");
             }
 
             Token currentToken = space.Token;
@@ -27,18 +27,18 @@ namespace photosynthesis.interpreter.commands
 
             if (nextToken == Token.Score)
             {
-                if (!player.TrySubtractLightPoints((int)nextToken)) return new CommandResponse(false, "Insufficient light points.");
+                if (!player.TrySubtractLightPoints((int)nextToken)) return new CommandResponse(CommandState.Failure, "Insufficient light points.");
 
                 player.AddScore(space.ScoreValue, gameState.ScoreTokens);
 
                 player.ShopAddToken(currentToken);
                 space.Clear();
                 gameState.Board.UpdateShadows();
-                return new CommandResponse(true);
+                return new CommandResponse(CommandState.GameStateUpdated);
             }
 
-            if (!player.Hand.Contains(nextToken)) return new CommandResponse(false, "Upgraded token missing from hand. Must buy one from the shop first.");
-            if (!player.TrySubtractLightPoints((int)nextToken)) return new CommandResponse(false, "Insufficient light points.");
+            if (!player.Hand.Contains(nextToken)) return new CommandResponse(CommandState.Failure, "Upgraded token missing from hand. Must buy one from the shop first.");
+            if (!player.TrySubtractLightPoints((int)nextToken)) return new CommandResponse(CommandState.Failure, "Insufficient light points.");
 
             player.Hand.Remove(nextToken);
             space.Set(player.Team, nextToken);
@@ -46,7 +46,7 @@ namespace photosynthesis.interpreter.commands
             player.ShopAddToken(currentToken);
 
             gameState.Board.UpdateShadows();
-            return new CommandResponse(true);
+            return new CommandResponse(CommandState.GameStateUpdated);
         }
     }
 }

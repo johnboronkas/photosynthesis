@@ -8,12 +8,14 @@ namespace photosynthesis
 {
     public class GameState
     {
+        public const bool HumanFriendlyConsole = true;
         public const bool DebugMode = true;
         public const bool AdvancedMode = true;
 
         public const int MaxRounds = AdvancedMode ? 4 : 3;
         public int CurrentRound { get; private set; }
 
+        public bool InitMode { get; set; }
         public List<Player> Players { get; private set; }
         public Dictionary<Team, Player> TeamToPlayer;
         public int PlayerNumberFirstToMove { get; private set; }
@@ -34,6 +36,7 @@ namespace photosynthesis
                 TeamToPlayer.Add(player.Team, player);
             });
 
+            InitMode = true;
             PlayerNumberFirstToMove = 0;
             CurrentPlayerNumber = 0;
             CurrentPlayer = Players[CurrentPlayerNumber];
@@ -42,23 +45,31 @@ namespace photosynthesis
             GameFile = gameFile;
         }
 
+        public void SetCurrentPlayer(int playerNumber)
+        {
+            CurrentPlayerNumber = playerNumber;
+            CurrentPlayer = Players[CurrentPlayerNumber];
+        }
+
         public void EndTurn()
         {
-            Players.ForEach((player) => { player.UsedSpaces.Clear(); });
+            CurrentPlayer.UsedSpaces.Clear();
 
             CurrentPlayerNumber = ++CurrentPlayerNumber % Players.Count;
-            
             if (CurrentPlayerNumber == PlayerNumberFirstToMove)
             {
-                PlayerNumberFirstToMove = ++CurrentPlayerNumber % Players.Count;
+                PlayerNumberFirstToMove = CurrentPlayerNumber = ++CurrentPlayerNumber % Players.Count;
                 Board.AdvanceSunPosition();
+                if (HumanFriendlyConsole) Console.WriteLine(string.Format("Sun is now to the {0}.", Board.SunDirection));
 
                 if (Board.SunDirection == Direction.North)
                 {
                     CurrentRound++;
+                    if (HumanFriendlyConsole) Console.WriteLine(string.Format("Begin Round {0}", CurrentRound + 1));
 
                     if (CurrentRound >= MaxRounds)
                     {
+                        if (HumanFriendlyConsole) Console.WriteLine("\n---- The game has ended ----");
                         EndOfGame();
                     }
                 }

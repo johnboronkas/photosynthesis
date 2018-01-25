@@ -31,7 +31,7 @@ namespace photosynthesis.interpreter.commands
             help.AppendLine("DebugShopToHand - Moves all player's shop tokens into their hands.");
 
             Console.WriteLine(help.ToString());
-            return new CommandResponse(true);
+            return new CommandResponse(CommandState.Successful);
         }
     }
 }

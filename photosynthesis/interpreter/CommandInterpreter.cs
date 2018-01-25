@@ -11,24 +11,43 @@ namespace photosynthesis.interpreter
 {
     public class CommandInterpreter
     {
-        public bool DoAction(GameState gameState, List<string> action)
+        public CommandState DoAction(GameState gameState, List<string> action)
         {
             try
             {
                 var type = Type.GetType("photosynthesis.interpreter.commands." + action.First(), true, true);
                 Command command = (Command)Activator.CreateInstance(type);
-                CommandResponse response = command.Perform(gameState, action.ToArray());
 
-                if (response.IsSuccessful)
+                if (gameState.InitMode)
                 {
-                    gameState.GameFile.AddMove(gameState.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
-                    return true;
+                    if (!(command is PlaceStartingTree || command is ShowBoard || command is ShowHex || command is ShowShadow ||
+                        command is Help || command is Exit || command is Players || command is WriteGameFile))
+                    {
+                        Console.WriteLine("Game is in initialize mode. Must use command PlaceStartingTree.");
+                        return CommandState.Failure;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine(response);
-                    return false;
+                    if (command is PlaceStartingTree)
+                    {
+                        Console.WriteLine("Not allowed to use initialize command while game is playing.");
+                        return CommandState.Failure;
+                    }
                 }
+
+                CommandResponse response = command.Perform(gameState, action.ToArray());
+                switch (response.State)
+                {
+                    case CommandState.GameStateUpdated:
+                        gameState.GameFile.AddMove(gameState.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
+                        break;
+                    case CommandState.Failure:
+                        Console.WriteLine(response);
+                        break;
+                }
+
+                return response.State;
             }
             catch (Exception e)
             {
@@ -40,7 +59,7 @@ namespace photosynthesis.interpreter
                     e is NullReferenceException || e is IndexOutOfRangeException)
                 {
                     Console.WriteLine(e);
-                    return false;
+                    return CommandState.Failure;
                 }
 
                 throw;
