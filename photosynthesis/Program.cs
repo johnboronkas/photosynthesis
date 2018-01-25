@@ -42,16 +42,9 @@ namespace photosynthesis
         static void DoInitialSetup(GameState gameState, CommandInterpreter interpreter)
         {
             int numPlayers = gameState.Players.Count;
-            for (int i = 0; i < numPlayers; i++)
+            for (int i = 0; i < numPlayers * 2; i++)
             {
-                gameState.SetCurrentPlayer(i);
-                if (GameState.HumanFriendlyConsole) Console.WriteLine(string.Format("\nIt's {0}'s turn.", gameState.CurrentPlayer.Team));
-                while (interpreter.DoAction(gameState, GetUserInput()) != CommandState.GameStateUpdated);
-            }
-
-            for (int i = numPlayers - 1; i >= 0; i--)
-            {
-                gameState.SetCurrentPlayer(i);
+                gameState.SetCurrentPlayer(i % numPlayers);
                 if (GameState.HumanFriendlyConsole) Console.WriteLine(string.Format("\nIt's {0}'s turn.", gameState.CurrentPlayer.Team));
                 while (interpreter.DoAction(gameState, GetUserInput()) != CommandState.GameStateUpdated);
             }
