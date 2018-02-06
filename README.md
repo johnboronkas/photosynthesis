@@ -24,3 +24,8 @@ Borrowed from https://www.redblobgames.com/grids/hexagons/.
 # playing
 `Help` shows a list of available commands and their descriptions.
 Illegal moves have no effect on your turn.
+
+# todo / notes
+- make consts changeable during setup, but not during the game
+- add cheat detection. before giving gamestate to bot. copy it. if we get back a modified game state. throw error.
+- bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
