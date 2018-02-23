@@ -27,5 +27,7 @@ Illegal moves have no effect on your turn.
 
 # todo / notes
 - make consts changeable during setup, but not during the game
-- add cheat detection. before giving gamestate to bot. copy it. if we get back a modified game state. throw error.
+- make sure the game state that the bot gets is a deep copy, then apply their moves to the real gamestate
 - bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
+- use csharp events for make setup move or make actual move
+- provide random bot impl as reference
