@@ -1,5 +1,11 @@
 # building
 Visual Studio Community 2017 - .NET 4.6.1
+	- Install the [.NET Core SDK](https://www.microsoft.com/net/learn/get-started/windows)
+	- Install [Visual Studio Code](https://code.visualstudio.com/)
+	- Install the C# VS Code extension by Microsoft
+	- Open the top-level photosynthesis folder in VS Code
+	- Press Ctrl + ` to open the terminal
+	- Enter the command `dotnet run` to run the program
 
 # project vision
 Use a standard notation to store games. Use various non-deterministic AIs to generate games. Feed generated games into a machine learning algorithm. Face machine learning algorithm against itself to continue learning.
