@@ -4,7 +4,7 @@ Visual Studio Community 2017 - .NET 4.6.1
 	- Install [Visual Studio Code](https://code.visualstudio.com/)
 	- Install the C# VS Code extension by Microsoft
 	- Open the top-level photosynthesis folder in VS Code
-	- Press Ctrl + ` to open the terminal
+	- Press Ctrl + \` to open the terminal
 	- Enter the command `dotnet run` to run the program
 
 # project vision
