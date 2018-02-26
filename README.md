@@ -31,3 +31,5 @@ Illegal moves have no effect on your turn.
 - bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
 - use csharp events for make setup move or make actual move
 - provide random bot impl as reference
+- add command set enum (ie gamesetup command, play command, debug, etc)
+- port to Core
