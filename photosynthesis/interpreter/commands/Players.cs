@@ -4,6 +4,11 @@ namespace photosynthesis.interpreter.commands
 {
     public class Players : Command
     {
+        public GameMode GetUseability()
+        {
+            return GameMode.Init | GameMode.Playing;
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             gameState.Players.ForEach((player) =>

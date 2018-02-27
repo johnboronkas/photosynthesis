@@ -18,7 +18,9 @@ namespace photosynthesis.interpreter
                 var type = Type.GetType("photosynthesis.interpreter.commands." + action.First(), true, true);
                 Command command = (Command)Activator.CreateInstance(type);
 
-                if (gameState.InitMode)
+                // PICKUP TODO CLEAN UP BELOW USING GAMEMODE/Command.GetUseability()
+
+                if (gameState.GameMode.IsSet(GameMode.Init))
                 {
                     if (!(command is PlaceStartingTree || command is ShowBoard || command is ShowHex || command is ShowShadow ||
                         command is Help || command is Exit || command is Players || command is WriteGameFile))

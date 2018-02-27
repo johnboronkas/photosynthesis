@@ -5,6 +5,11 @@ namespace photosynthesis.interpreter.commands
 {
     public class Buy : Command
     {
+        public GameMode GetUseability()
+        {
+            return GameMode.Playing;
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             string tokenInput = parameters[1];

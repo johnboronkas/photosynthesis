@@ -4,9 +4,14 @@ namespace photosynthesis.interpreter.commands
 {
     public class DebugAddLightPoints : Command
     {
+        public GameMode GetUseability()
+        {
+            return GameMode.Debug | GameMode.Playing;
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
-            if (GameState.DebugMode)
+            if (gameState.GameMode.IsSet(GameMode.Debug))
             {
                 gameState.Players.ForEach((player) =>
                 {

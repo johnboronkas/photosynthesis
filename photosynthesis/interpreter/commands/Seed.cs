@@ -5,6 +5,11 @@ namespace photosynthesis.interpreter.commands
 {
     public class Seed : Command
     {
+        public GameMode GetUseability()
+        {
+            return GameMode.Playing;
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Player player = gameState.CurrentPlayer;
@@ -20,7 +25,7 @@ namespace photosynthesis.interpreter.commands
             if (spaceFrom.Team != player.Team) return new CommandResponse(CommandState.Failure, "Cannot seed from unowned hex.");
             if (Token.SmallTree <= spaceFrom.Token && spaceFrom.Token <= Token.LargeTree) return new CommandResponse(CommandState.Failure, "Cannot seed from non-tree token.");
 
-            if (GameState.AdvancedMode)
+            if (gameState.GameMode.IsSet(GameMode.Advanced))
             {
                 if (!spaceFrom.IsLit) { return new CommandResponse(CommandState.Failure, "Cannot use an unlit hex."); }
             }

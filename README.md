@@ -1,5 +1,4 @@
 # building
-Visual Studio Community 2017 - .NET 4.6.1
 - Install the [.NET Core SDK](https://www.microsoft.com/net/learn/get-started/windows)
 - Install [Visual Studio Code](https://code.visualstudio.com/)
 - Install the C# VS Code extension by Microsoft
@@ -37,5 +36,3 @@ Illegal moves have no effect on your turn.
 - bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
 - use csharp events for make setup move or make actual move
 - provide random bot impl as reference
-- add command set enum (ie gamesetup command, play command, debug, etc)
-- port to Core

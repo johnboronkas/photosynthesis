@@ -5,6 +5,11 @@ namespace photosynthesis.interpreter.commands
 {
     public class Help : Command
     {
+        public GameMode GetUseability()
+        {
+            return GameMode.Config | GameMode.Init | GameMode.Playing;
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             StringBuilder help = new StringBuilder();

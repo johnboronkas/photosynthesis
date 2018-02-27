@@ -4,6 +4,11 @@ namespace photosynthesis.interpreter.commands
 {
     public class WriteGameFile : Command
     {
+        public GameMode GetUseability()
+        {
+            return GameMode.Init | GameMode.Playing;
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             var path = Environment.CurrentDirectory + "\\gamefile.txt";

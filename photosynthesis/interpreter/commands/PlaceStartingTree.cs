@@ -5,6 +5,11 @@ namespace photosynthesis.interpreter.commands
 {
     public class PlaceStartingTree : Command
     {
+        public GameMode GetUseability()
+        {
+            return GameMode.Init;
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Space space;

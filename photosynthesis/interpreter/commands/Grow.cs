@@ -5,6 +5,11 @@ namespace photosynthesis.interpreter.commands
 {
     public class Grow : Command
     {
+        public GameMode GetUseability()
+        {
+            return GameMode.Playing;
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Player player = gameState.CurrentPlayer;
@@ -17,7 +22,7 @@ namespace photosynthesis.interpreter.commands
             if (space.Team != player.Team) return new CommandResponse(CommandState.Failure, "Cannot upgrade unowned hex.");
             if (player.UsedSpaces.Contains(space)) return new CommandResponse(CommandState.Failure, "Cannot use the same hex more than once a turn.");
 
-            if (GameState.AdvancedMode)
+            if (gameState.GameMode.IsSet(GameMode.Advanced))
             {
                 if (!space.IsLit) return new CommandResponse(CommandState.Failure, "Cannot use an unlit hex.");
             }

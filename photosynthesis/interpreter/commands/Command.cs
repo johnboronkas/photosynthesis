@@ -2,6 +2,8 @@
 {
     public interface Command
     {
+        GameMode GetUseability();
+
         /// <summary>
         /// Throws InvalidCommandException if the command provided is invalid or illegal.
         /// </summary>

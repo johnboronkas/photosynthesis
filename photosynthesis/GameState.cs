@@ -8,14 +8,11 @@ namespace photosynthesis
 {
     public class GameState
     {
-        public const bool HumanFriendlyConsole = true;
-        public const bool DebugMode = true;
-        public const bool AdvancedMode = true;
-
-        public const int MaxRounds = AdvancedMode ? 4 : 3;
+        public GameMode GameMode { get; set; }
+        public int MaxRounds { get; private set; }
+        private const int NumAdvancedRounds = 4;
+        private const int NumNormalRounds = 3;
         public int CurrentRound { get; private set; }
-
-        public bool InitMode { get; set; }
         public List<Player> Players { get; private set; }
         public Dictionary<Team, Player> TeamToPlayer;
         public int PlayerNumberFirstToMove { get; private set; }
@@ -25,8 +22,12 @@ namespace photosynthesis
         public ScoreTokens ScoreTokens { get; private set; }
         public GameFile GameFile { get; private set; }
 
-        public GameState(List<Player> players, Board board, ScoreTokens scoreTokens, GameFile gameFile)
+        public GameState(GameMode gameMode, List<Player> players, Board board, ScoreTokens scoreTokens, GameFile gameFile)
         {
+            GameMode = gameMode;
+            GameMode.Set(GameMode.Config, true);
+            UseAdvancedRules(GameMode.IsSet(GameMode.Advanced));
+
             CurrentRound = 0;
 
             Players = players;
@@ -36,13 +37,17 @@ namespace photosynthesis
                 TeamToPlayer.Add(player.Team, player);
             });
 
-            InitMode = true;
             PlayerNumberFirstToMove = 0;
             CurrentPlayerNumber = 0;
             CurrentPlayer = Players[CurrentPlayerNumber];
             Board = board;
             ScoreTokens = scoreTokens;
             GameFile = gameFile;
+        }
+
+        public void UseAdvancedRules(bool advancedMode)
+        {
+            MaxRounds = advancedMode ? NumAdvancedRounds : NumNormalRounds;
         }
 
         public void SetCurrentPlayer(int playerNumber)
@@ -60,16 +65,16 @@ namespace photosynthesis
             {
                 PlayerNumberFirstToMove = CurrentPlayerNumber = ++CurrentPlayerNumber % Players.Count;
                 Board.AdvanceSunPosition();
-                if (HumanFriendlyConsole) Console.WriteLine(string.Format("Sun is now to the {0}.", Board.SunDirection));
+                if (GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine(string.Format("Sun is now to the {0}.", Board.SunDirection));
 
                 if (Board.SunDirection == Direction.North)
                 {
                     CurrentRound++;
-                    if (HumanFriendlyConsole) Console.WriteLine(string.Format("Begin Round {0}", CurrentRound + 1));
+                    if (GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine(string.Format("Begin Round {0}", CurrentRound + 1));
 
                     if (CurrentRound >= MaxRounds)
                     {
-                        if (HumanFriendlyConsole) Console.WriteLine("\n---- The game has ended ----");
+                        if (GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("\n---- The game has ended ----");
                         EndOfGame();
                     }
                 }
