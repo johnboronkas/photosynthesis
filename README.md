@@ -12,9 +12,6 @@ Use a standard notation to store games. Use various non-deterministic AIs to gen
 # physical setup
 Setup with the board facing you and the sun start position at the top-right hand courner of the board.
 
-# settings
-Can set debug mode and advanced rules in `GameState`.
-
 # game file
 A list of moves from an initial gamestate that can be used to save, restore, or replay a game. Much like [chess notation](https://en.wikipedia.org/wiki/Chess_notation).
 
@@ -31,6 +28,7 @@ Borrowed from https://www.redblobgames.com/grids/hexagons/.
 Illegal moves have no effect on your turn.
 
 # todo / notes
+- update command interpreter to use new GameMode flags that all commands now have
 - make consts changeable during setup, but not during the game
 - make sure the game state that the bot gets is a deep copy, then apply their moves to the real gamestate
 - bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
