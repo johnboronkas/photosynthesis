@@ -44,7 +44,6 @@ Illegal moves have no effect on your turn.
 
 ## todo / notes
 
-- update command interpreter to use new GameMode flags that all commands now have
 - make consts changeable during setup, but not during the game
 - make sure the game state that the bot gets is a deep copy, then apply their moves to the real gamestate
 - bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))

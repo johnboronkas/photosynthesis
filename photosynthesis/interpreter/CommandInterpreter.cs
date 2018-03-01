@@ -18,24 +18,19 @@ namespace photosynthesis.interpreter
                 var type = Type.GetType("photosynthesis.interpreter.commands." + action.First(), true, true);
                 Command command = (Command)Activator.CreateInstance(type);
 
-                // PICKUP TODO CLEAN UP BELOW USING GAMEMODE/Command.GetUseability()
-
-                if (gameState.GameMode.IsSet(GameMode.Init))
+                // Check for Debug.
+                if (command.GetUseability().IsSet(GameMode.Debug) &&
+                   (!gameState.GameMode.IsSet(GameMode.Debug)))
                 {
-                    if (!(command is PlaceStartingTree || command is ShowBoard || command is ShowHex || command is ShowShadow ||
-                        command is Help || command is Exit || command is Players || command is WriteGameFile))
-                    {
-                        Console.WriteLine("Game is in initialize mode. Must use command PlaceStartingTree.");
-                        return CommandState.Failure;
-                    }
+                    Console.WriteLine("Cannot use debug commands if debug mode is not enabled.");
+                    return CommandState.Failure;
                 }
-                else
+
+                // Check if we are currently in the correct game phase.
+                if (!command.GetUseability().IsSamePhase(gameState.GameMode))
                 {
-                    if (command is PlaceStartingTree)
-                    {
-                        Console.WriteLine("Not allowed to use initialize command while game is playing.");
-                        return CommandState.Failure;
-                    }
+                    Console.WriteLine("Cannot use this command while in this phase.");
+                    return CommandState.Failure;
                 }
 
                 CommandResponse response = command.Perform(gameState, action.ToArray());
@@ -68,6 +63,9 @@ namespace photosynthesis.interpreter
             }
         }
 
+        /// <summary>
+        /// Turns a list of 3 ints into Hex coordinates.
+        /// </summary>
         internal static Hex ParamsToHex(List<string> parameters)
         {
             return new Hex(int.Parse(parameters[0]), int.Parse(parameters[1]), int.Parse(parameters[2]));

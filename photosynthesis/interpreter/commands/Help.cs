@@ -12,11 +12,13 @@ namespace photosynthesis.interpreter.commands
 
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
+            // TODO Do something smart here. Should be a way to auto-grab all of the commands and only show the commands that are relevant.
+
             StringBuilder help = new StringBuilder();
 
             help.AppendLine("Help - Prints this help menu.");
             help.AppendLine("Exit - Exits the program.");
-            // TODO Load gamefile and resume play.
+            // TODO Save/load gamefile and resume play.
             // TODO Add setup commands (ie, StartGame RandomBot Human MiddleBot Human -- where bots are loaded via reflection).
             help.AppendLine("\n---- MOVES ----");
             help.AppendLine("PlaceStartingTree q r s - Places a small tree on the given cube coordinate. Can only be used on the outer rim of the board.");

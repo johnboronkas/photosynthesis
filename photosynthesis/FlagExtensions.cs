@@ -20,5 +20,15 @@ namespace photosynthesis
                 e &= ~mode;
             }
         }
+
+        public static bool IsSamePhase(this GameMode e, GameMode other)
+        {
+            var mask = GameMode.Config | GameMode.Init | GameMode.Playing;
+
+            var actualPhase = e & mask;
+            var otherPhase = e & mask;
+
+            return actualPhase.Equals(otherPhase);
+        }
     }
 }

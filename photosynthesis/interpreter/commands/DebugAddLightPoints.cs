@@ -11,19 +11,12 @@ namespace photosynthesis.interpreter.commands
 
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
-            if (gameState.GameMode.IsSet(GameMode.Debug))
+            gameState.Players.ForEach((player) =>
             {
-                gameState.Players.ForEach((player) =>
-                {
-                    player.AddLightPoints(Player.MaxLightPoints);
-                });
+                player.AddLightPoints(Player.MaxLightPoints);
+            });
 
-                return new CommandResponse(CommandState.GameStateUpdated);
-            }
-            else
-            {
-                return new CommandResponse(CommandState.Failure, "Cannot use debug commands if debug mode is not set in GameState.");
-            }
+            return new CommandResponse(CommandState.GameStateUpdated);
         }
     }
 }
