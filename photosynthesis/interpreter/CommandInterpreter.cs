@@ -20,7 +20,7 @@ namespace photosynthesis.interpreter
 
                 // Check for Debug.
                 if (command.GetUseability().IsSet(GameMode.Debug) &&
-                   (!gameState.GameMode.IsSet(GameMode.Debug)))
+                   !gameState.GameMode.IsSet(GameMode.Debug))
                 {
                     Console.WriteLine("Cannot use debug commands if debug mode is not enabled.");
                     return CommandState.Failure;
@@ -29,7 +29,7 @@ namespace photosynthesis.interpreter
                 // Check if we are currently in the correct game phase.
                 if (!command.GetUseability().IsSamePhase(gameState.GameMode))
                 {
-                    Console.WriteLine("Cannot use this command while in this phase.");
+                    Console.WriteLine("Cannot use this command while in this phase. Use help to see available commands.");
                     return CommandState.Failure;
                 }
 

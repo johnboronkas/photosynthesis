@@ -26,9 +26,13 @@ namespace photosynthesis
             var mask = GameMode.Config | GameMode.Init | GameMode.Playing;
 
             var actualPhase = e & mask;
-            var otherPhase = e & mask;
+            var otherPhase = other & mask;
 
-            return actualPhase.Equals(otherPhase);
+            /*
+            * If actualPhase and otherPhase have at least 1 phase in common,
+            * then we consider them the same.
+            */
+            return (actualPhase & otherPhase) > 0;
         }
     }
 }

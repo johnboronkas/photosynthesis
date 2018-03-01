@@ -18,7 +18,7 @@ namespace photosynthesis
             var gameFile = new GameFile();
             var interpreter = new CommandInterpreter();
 
-            var gameMode = GameMode.Advanced | GameMode.Debug | GameMode.HumanFriendly;
+            var gameMode = GameMode.Config | GameMode.Advanced | GameMode.Debug | GameMode.HumanFriendly;
 
             // TODO Add gamesetup commands.
 
@@ -43,6 +43,9 @@ namespace photosynthesis
 
         static void DoInitialSetup(GameState gameState, CommandInterpreter interpreter)
         {
+            gameState.GameMode.Set(GameMode.Config, false);
+            gameState.GameMode.Set(GameMode.Init, true);
+
             int numPlayers = gameState.Players.Count;
             for (int i = 0; i < numPlayers * 2; i++)
             {

@@ -25,7 +25,6 @@ namespace photosynthesis
         public GameState(GameMode gameMode, List<Player> players, Board board, ScoreTokens scoreTokens, GameFile gameFile)
         {
             GameMode = gameMode;
-            GameMode.Set(GameMode.Config, true);
             UseAdvancedRules(GameMode.IsSet(GameMode.Advanced));
 
             CurrentRound = 0;
