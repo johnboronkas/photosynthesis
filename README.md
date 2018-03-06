@@ -49,7 +49,7 @@ Illegal moves have no effect on your turn.
 
 ### stretch goals
 
-- [ ] Colors for termainal interface output
+- [ ] Colors for terminal interface output
 - [ ] 2D interface
 - [ ] REST endpoints for bots in other languages / remote play
 - [ ] Client/server socket connections for networked play
