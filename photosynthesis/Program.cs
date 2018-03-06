@@ -20,7 +20,7 @@ namespace photosynthesis
 
             var gameMode = GameMode.Config | GameMode.Advanced | GameMode.Debug | GameMode.HumanFriendly;
 
-            // TODO Add gamesetup commands.
+            // PICKUP TODO Add gamesetup commands.
 
             var gameState = new GameState(gameMode, new List<Player>()
             {
