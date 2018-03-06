@@ -53,5 +53,10 @@ namespace photosynthesis.interpreter.commands
             gameState.Board.UpdateShadows();
             return new CommandResponse(CommandState.GameStateUpdated);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "q r s", "Grows the given cube coordinate.");
+        }
     }
 }

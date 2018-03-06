@@ -12,5 +12,10 @@
             gameState.EndTurn();
             return new CommandResponse(CommandState.GameStateUpdated);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "End your turn and advance the game.");
+        }
     }
 }

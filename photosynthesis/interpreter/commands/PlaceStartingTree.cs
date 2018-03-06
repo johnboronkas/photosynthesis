@@ -26,5 +26,10 @@ namespace photosynthesis.interpreter.commands
 
             return new CommandResponse(CommandState.GameStateUpdated);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "q r s", "Places a small tree on the given cube coordinate. Can only be used on the outer rim of the board.");
+        }
     }
 }

@@ -17,5 +17,10 @@
 
             return new CommandResponse(CommandState.GameStateUpdated);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "Moves all players' shop tokens into their hands.");
+        }
     }
 }

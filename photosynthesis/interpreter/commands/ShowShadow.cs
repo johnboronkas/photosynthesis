@@ -14,5 +14,10 @@ namespace photosynthesis.interpreter.commands
             Console.WriteLine(gameState.Board.ShadowsHumanReadable());
             return new CommandResponse(CommandState.Successful);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "Prints X if shaded, O if lit, and the tokenID for each hex.");
+        }
     }
 }

@@ -22,10 +22,6 @@ Use a standard notation to store games. Use various non-deterministic AIs to gen
 
 Setup with the board facing you and the sun start position at the top-right hand courner of the board.
 
-## settings
-
-Can set debug mode and advanced rules in `GameState`.
-
 ## game file
 
 A list of moves from an initial gamestate that can be used to save, restore, or replay a game. Much like [chess notation](https://en.wikipedia.org/wiki/Chess_notation).
@@ -47,5 +43,6 @@ Illegal moves have no effect on your turn.
 - make consts changeable during setup, but not during the game
 - make sure the game state that the bot gets is a deep copy, then apply their moves to the real gamestate
 - bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
+  - bots may also send just 1 string/action and, if it is still their turn, they'll recieve an updated gamestate to make their next move until a pass is recieved
 - use csharp events for make setup move or make actual move
 - provide random bot impl as reference

@@ -46,5 +46,10 @@ namespace photosynthesis.interpreter.commands
             player.UsedSpaces.Add(spaceFrom);
             return new CommandResponse(CommandState.GameStateUpdated);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "srcQ srcR srcS dstQ dstR dstS", "Shoots a seed from the source cube coordinate to the destination cube coordinate.");
+        }
     }
 }

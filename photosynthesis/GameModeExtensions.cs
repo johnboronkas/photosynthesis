@@ -2,7 +2,7 @@ using System;
 
 namespace photosynthesis
 {
-    public static class FlagExtensions
+    public static class GameModeExtensions
     {
         public static bool IsSet(this GameMode e, GameMode mode)
         {

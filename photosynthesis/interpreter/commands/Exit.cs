@@ -14,5 +14,10 @@ namespace photosynthesis.interpreter.commands
             Environment.Exit(0);
             return new CommandResponse(CommandState.Successful);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "Exits the program.");
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace photosynthesis.interpreter
         {
             try
             {
+                // PICKUP TODO better way to do this? (Safer, only take things that implement command and isn't an interface? See Help.cs)
                 var type = Type.GetType("photosynthesis.interpreter.commands." + action.First(), true, true);
                 Command command = (Command)Activator.CreateInstance(type);
 

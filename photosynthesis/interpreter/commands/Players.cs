@@ -18,5 +18,10 @@ namespace photosynthesis.interpreter.commands
 
             return new CommandResponse(CommandState.Successful);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "Prints player stats for every player.");
+        }
     }
 }

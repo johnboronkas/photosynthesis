@@ -16,5 +16,10 @@ namespace photosynthesis.interpreter.commands
             Console.WriteLine(string.Format("Game file written to: `{0}`.", path));
             return new CommandResponse(CommandState.Successful);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "Writes the current gamefile to disk (overwrites).");
+        }
     }
 }

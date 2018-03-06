@@ -14,5 +14,10 @@ namespace photosynthesis.interpreter.commands
             Console.WriteLine(gameState.Board.HexesHumanReadable());
             return new CommandResponse(CommandState.Successful);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "Prints cube coordinates (q, r, s) of every hex.");
+        }
     }
 }

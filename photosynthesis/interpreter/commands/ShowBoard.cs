@@ -14,5 +14,10 @@ namespace photosynthesis.interpreter.commands
             Console.WriteLine(gameState.Board.SpacesHumanReadable());
             return new CommandResponse(CommandState.Successful);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "Prints TeamNum and Token, where '--' is none.");
+        }
     }
 }

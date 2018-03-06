@@ -18,5 +18,10 @@ namespace photosynthesis.interpreter.commands
 
             return new CommandResponse(CommandState.GameStateUpdated);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "", "Maxes out every player's light points.");
+        }
     }
 }

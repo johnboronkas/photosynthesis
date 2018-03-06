@@ -25,5 +25,10 @@ namespace photosynthesis.interpreter.commands
             player.Hand.Add(tokenToBuy);
             return new CommandResponse(CommandState.GameStateUpdated);
         }
+
+        public override string ToString()
+        {
+            return HelpString.Create(GetType().Name, "[seed|smalltree|mediumtree|largetree]", "Buys a token from your shop.");
+        }
     }
 }
