@@ -12,7 +12,7 @@
 code --install-extension DavidAnson.vscode-markdownlint --install-extension jchannon.csharpextensions --install-extension josephwoodward.vscodeilviewer --install-extension k--kato.docomment --install-extension ms-vscode.csharp --install-extension PKief.material-icon-theme --install-extension reflectiondm.classynaming
 ```
 
-- Enter the command `dotnet run` to run the program (can use `dotnet build` to just build)
+- Enter the command `dotnet run` to build & run the program (can use `dotnet build` to just build)
 
 ## project vision
 
