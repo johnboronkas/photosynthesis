@@ -40,17 +40,17 @@ Illegal moves have no effect on your turn.
 
 ## todo
 
-[] make game configuation command
-[] make sure the game state that the bot gets is a deep copy, then apply their moves to the real gamestate
-[] bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
-  [] bots may also send just 1 string/action and, if it is still their turn, they'll recieve an updated gamestate to make their next move until a pass is recieved
-[] use csharp events for make setup move or make actual move
-[] provide random bot impl as reference
+- [ ] make game configuation command
+- [ ] make sure the game state that the bot gets is a deep copy, then apply their moves to the real gamestate
+- [ ] bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
+  - [ ] bots may also send just 1 string/action and, if it is still their turn, they'll recieve an updated gamestate to make their next move until a pass is recieved
+- [ ] use csharp events for make setup move or make actual move
+- [ ] provide random bot impl as reference
 
 ### stretch goals
 
-[] Colors for termainal interface output
-[] 2D interface
-[] REST endpoints for bots in other languages / remote play
-[] Client/server socket connections for networked play
-[] Allow changing of the board size in setup
+- [ ] Colors for termainal interface output
+- [ ] 2D interface
+- [ ] REST endpoints for bots in other languages / remote play
+- [ ] Client/server socket connections for networked play
+- [ ] Allow changing of the board size in setup
