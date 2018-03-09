@@ -8,7 +8,7 @@ namespace photosynthesis
 {
     public class GameState
     {
-        public GameMode GameMode { get; set; }
+        public GameMode GameMode { get; private set; }
         public int MaxRounds { get; private set; }
         private const int NumAdvancedRounds = 4;
         private const int NumNormalRounds = 3;
@@ -44,7 +44,13 @@ namespace photosynthesis
             GameFile = gameFile;
         }
 
-        public void UseAdvancedRules(bool advancedMode)
+        public void SetGameMode(GameMode gameMode, bool value)
+        {
+            GameMode = GameMode.Set(gameMode, value);
+            UseAdvancedRules(GameMode.IsSet(GameMode.Advanced));
+        }
+
+        private void UseAdvancedRules(bool advancedMode)
         {
             MaxRounds = advancedMode ? NumAdvancedRounds : NumNormalRounds;
         }

@@ -9,7 +9,7 @@ namespace photosynthesis
             return e.HasFlag(mode);
         }
 
-        public static void Set(this GameMode e, GameMode mode, bool value)
+        public static GameMode Set(this GameMode e, GameMode mode, bool value)
         {
             if (value)
             {
@@ -19,6 +19,8 @@ namespace photosynthesis
             {
                 e &= ~mode;
             }
+
+            return e;
         }
 
         public static bool IsSamePhase(this GameMode e, GameMode other)

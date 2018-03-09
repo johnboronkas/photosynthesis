@@ -20,8 +20,6 @@ namespace photosynthesis
 
             var gameMode = GameMode.Config | GameMode.Advanced | GameMode.Debug | GameMode.HumanFriendly;
 
-            // PICKUP TODO Add gamesetup commands.
-
             var gameState = new GameState(gameMode, new List<Player>()
             {
                 new Player(Team.Orange),
@@ -30,7 +28,16 @@ namespace photosynthesis
                 new Player(Team.Yellow),
             }, board, scoreTokens, gameFile);
 
-            if (gameState.GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("\nBegin game setup.");
+            if (gameState.GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("\nBegin configuration.");
+            while (gameState.GameMode.IsSet(GameMode.Config))
+            {
+                while (interpreter.DoAction(gameState, GetUserInput(gameState.GameMode)) == CommandState.Failure);
+                if (gameState.GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("GameMode is now " + gameState.GameMode);
+            }
+
+            if (gameState.GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("Playing with gamemode set to " + gameState.GameMode);
+
+            if (gameState.GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("\nBegin game init.");
             DoInitialSetup(gameState, interpreter);
 
             if (gameState.GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("\nThe game begins.");
@@ -43,9 +50,6 @@ namespace photosynthesis
 
         static void DoInitialSetup(GameState gameState, CommandInterpreter interpreter)
         {
-            gameState.GameMode.Set(GameMode.Config, false);
-            gameState.GameMode.Set(GameMode.Init, true);
-
             int numPlayers = gameState.Players.Count;
             for (int i = 0; i < numPlayers * 2; i++)
             {
@@ -56,8 +60,8 @@ namespace photosynthesis
 
             gameState.CollectLightPoints();
             gameState.SetCurrentPlayer(0);
-            gameState.GameMode.Set(GameMode.Init, false);
-            gameState.GameMode.Set(GameMode.Playing, true);
+            gameState.SetGameMode(GameMode.Init, false);
+            gameState.SetGameMode(GameMode.Playing, true);
         }
 
         static List<string> GetUserInput(GameMode gameMode)
