@@ -49,7 +49,10 @@ Illegal moves have no effect on your turn.
 
 ### stretch goals
 
+- [ ] Move terminal commands into custom terminal module (so we can turn them off or redirect output to an interface, log file, or something down the line)
+  - Use my terminal package?
 - [ ] Colors for terminal interface output
+  - Use my terminal package?
 - [ ] 2D interface
 - [ ] REST endpoints for bots in other languages / remote play
 - [ ] Client/server socket connections for networked play
