@@ -41,6 +41,7 @@ Illegal moves have no effect on your turn.
 ## todo
 
 - [ ] make game configuation command
+- [ ] update rules from V1 to V2 of the rulebook
 - [ ] make sure the game state that the bot gets is a deep copy, then apply their moves to the real gamestate
 - [ ] bots are given gamestate. must return list of strings as a move that ends with a pass. make class to make creating this list easier (ie, add move (new buysmalltree()))
   - [ ] bots may also send just 1 string/action and, if it is still their turn, they'll recieve an updated gamestate to make their next move until a pass is recieved
