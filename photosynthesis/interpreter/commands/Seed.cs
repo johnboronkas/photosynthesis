@@ -23,7 +23,7 @@ namespace photosynthesis.interpreter.commands
             if (player.UsedSpaces.Contains(spaceFrom)) return new CommandResponse(CommandState.Failure, "Cannot use the same hex more than once a turn.");
 
             if (spaceFrom.Team != player.Team) return new CommandResponse(CommandState.Failure, "Cannot seed from unowned hex.");
-            if (Token.SmallTree <= spaceFrom.Token && spaceFrom.Token <= Token.LargeTree) return new CommandResponse(CommandState.Failure, "Cannot seed from non-tree token.");
+            if (Token.SmallTree < spaceFrom.Token && spaceFrom.Token > Token.LargeTree) return new CommandResponse(CommandState.Failure, "Cannot seed from non-tree token.");
 
             if (gameState.GameMode.IsSet(GameMode.Advanced))
             {

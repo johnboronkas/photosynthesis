@@ -47,9 +47,12 @@ Illegal moves have no effect on your turn.
   - [ ] bots may also send just 1 string/action and, if it is still their turn, they'll recieve an updated gamestate to make their next move until a pass is recieved
 - [ ] use csharp events for make setup move or make actual move
 - [ ] provide random bot impl as reference
+- [ ] write rules for bot competition (speed per turn, source code and directory for related files size limit) and send email blast
 
 ### stretch goals
 
+- [ ] Singleplayer challange
+  - In a one player game, make a bot that scores the most amount of points possible.
 - [ ] Move terminal commands into custom terminal module (so we can turn them off or redirect output to an interface, log file, or something down the line)
   - Use my terminal package?
 - [ ] Colors for terminal interface output
