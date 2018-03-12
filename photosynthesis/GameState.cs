@@ -13,6 +13,7 @@ namespace photosynthesis
         private const int NumAdvancedRounds = 4;
         private const int NumNormalRounds = 3;
         public int CurrentRound { get; private set; }
+        public const int MaxPlayers = 4;
         public List<Player> Players { get; private set; }
         public Dictionary<Team, Player> TeamToPlayer;
         public int PlayerNumberFirstToMove { get; private set; }
@@ -22,26 +23,33 @@ namespace photosynthesis
         public ScoreTokens ScoreTokens { get; private set; }
         public GameFile GameFile { get; private set; }
 
-        public GameState(GameMode gameMode, List<Player> players, Board board, ScoreTokens scoreTokens, GameFile gameFile)
+        public GameState(GameMode gameMode, Board board, ScoreTokens scoreTokens, GameFile gameFile)
         {
             GameMode = gameMode;
             UseAdvancedRules(GameMode.IsSet(GameMode.Advanced));
 
             CurrentRound = 0;
 
-            Players = players;
+            Players = new List<Player>();
             TeamToPlayer = new Dictionary<Team, Player>();
-            players.ForEach((player) =>
-            {
-                TeamToPlayer.Add(player.Team, player);
-            });
 
             PlayerNumberFirstToMove = 0;
             CurrentPlayerNumber = 0;
-            CurrentPlayer = Players[CurrentPlayerNumber];
+            CurrentPlayer = null;
             Board = board;
             ScoreTokens = scoreTokens;
             GameFile = gameFile;
+        }
+
+        public void AddPlayer(Player player)
+        {
+            Players.Add(player);
+            TeamToPlayer.Add(player.Team, player);
+
+            if (CurrentPlayer == null)
+            {
+                CurrentPlayer = player;
+            }
         }
 
         public void SetGameMode(GameMode gameMode, bool value)

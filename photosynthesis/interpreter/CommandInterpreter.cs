@@ -70,5 +70,23 @@ namespace photosynthesis.interpreter
         {
             return new Hex(int.Parse(parameters[0]), int.Parse(parameters[1]), int.Parse(parameters[2]));
         }
+
+        internal static bool? ParamsToOnOff(List<string> parameters)
+        {
+            Console.WriteLine("Debug: " + parameters[1]);
+
+            if (parameters == null || parameters.Count <= 1)
+            {
+                return null;
+            }
+
+            string input = parameters[1];
+            switch (input.ToLowerInvariant())
+            {
+                case "on": return true;
+                case "off": return false;
+                default: return null;
+            }
+        }
     }
 }

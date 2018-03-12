@@ -18,15 +18,8 @@ namespace photosynthesis
             var gameFile = new GameFile();
             var interpreter = new CommandInterpreter();
 
-            var gameMode = GameMode.Config | GameMode.Advanced | GameMode.Debug | GameMode.HumanFriendly;
-
-            var gameState = new GameState(gameMode, new List<Player>()
-            {
-                new Player(Team.Orange),
-                new Player(Team.Blue),
-                new Player(Team.Green),
-                new Player(Team.Yellow),
-            }, board, scoreTokens, gameFile);
+            var gameMode = GameMode.Config | GameMode.Advanced | GameMode.HumanFriendly;
+            var gameState = new GameState(gameMode, board, scoreTokens, gameFile);
 
             if (gameState.GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("\nBegin configuration.");
             while (gameState.GameMode.IsSet(GameMode.Config))

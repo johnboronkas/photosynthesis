@@ -11,6 +11,11 @@ namespace photosynthesis.interpreter.commands
 
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
+            if (gameState.Players.Count <= 0)
+            {
+                return new CommandResponse(CommandState.Failure, "Must have at least 1 player before starting the game.");
+            }
+
             gameState.SetGameMode(GameMode.Config, false);
             gameState.SetGameMode(GameMode.Init, true);
             return new CommandResponse(CommandState.Successful);
