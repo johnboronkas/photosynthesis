@@ -64,6 +64,7 @@ Illegal moves have no effect on your turn.
   - [ ] bots may also send just 1 string/action and, if it is still their turn, they'll recieve an updated gamestate to make their next move until a pass is recieved
 - [ ] use csharp events for make setup move or make actual move
 - [ ] provide random bot impl as reference
+- [ ] check game file to ensure it only has the necessary moves for playback
 - [ ] write rules for bot competition (speed per turn and delivery size limit) and send email blast
 
 ### stretch goals
@@ -78,3 +79,4 @@ Illegal moves have no effect on your turn.
 - [ ] REST endpoints for bots in other languages / remote play
 - [ ] Client/server socket connections for networked play
 - [ ] Allow changing of the board size in setup
+- [ ] Save/Load and replay mode
