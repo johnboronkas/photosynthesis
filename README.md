@@ -38,6 +38,23 @@ A [hex-grid representation](https://www.redblobgames.com/grids/hexagons/) of the
 `Help` shows a list of available commands and their descriptions.
 Illegal moves have no effect on your turn.
 
+## bots todo list
+
+- [ ] bots can be added to the game via the AddPlayer command
+  - [ ] add argument to AddPlayer that accepts a name and load that bot if it exists, use that player's name alongside the player's color (ie, barabbas/Blue)
+    - players should have a 'make move' function and a 'is bot' function
+    - human players may have a name if it doesn't conflict with a bot's name
+- [ ] each bot is put into a cs file named whatever their name is (ie, bots/barabbas.cs)
+  - this cs file is the entrypoint for each bot (using cs events)
+- [ ] during the game, if the current player is a bot, then use the 'make move' (else use the cli intrepreter)
+- [ ] during the game, if the current player is a bot, set a timer to ensure their move is under the configurable time limit, pass if it elapses
+  - remember that they can send a move list without a pass at the end, get a response, then keep moving
+  - put in GameState so bots have access to it and the current move timer
+- [ ] provide method to get access to a directory for the bot to store temp files (ie, botdirs/barabbas/)
+  - [ ] create the directory when the bot is added to the game
+  - [ ] clear the directory at the end of the game
+  - [ ] add command that clears all bot temp directories
+
 ## todo
 
 - [X] make game configuation command
@@ -47,12 +64,12 @@ Illegal moves have no effect on your turn.
   - [ ] bots may also send just 1 string/action and, if it is still their turn, they'll recieve an updated gamestate to make their next move until a pass is recieved
 - [ ] use csharp events for make setup move or make actual move
 - [ ] provide random bot impl as reference
-- [ ] write rules for bot competition (speed per turn, source code and directory for related files size limit) and send email blast
+- [ ] write rules for bot competition (speed per turn and delivery size limit) and send email blast
 
 ### stretch goals
 
 - [ ] Singleplayer challange
-  - In a one player game, make a bot that scores the most amount of points possible.
+  - In a one player game, use all bots to see which scores the most amount of points
 - [ ] Move terminal commands into custom terminal module (so we can turn them off or redirect output to an interface, log file, or something down the line)
   - Use my terminal package?
 - [ ] Colors for terminal interface output
