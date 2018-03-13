@@ -40,16 +40,14 @@ Illegal moves have no effect on your turn.
 
 ## bots todo list
 
-- [ ] update commands to include a "CanFoo" version
-  - The real command calls "CanFoo" on itself, then carries out the result if Can returned true
-- [ ] update the Bot class to use the Can versions of the commands
-  - [ ] add comments to all methods in the Bot class
+- [ ] add comments to all methods in the Bot class
 - [ ] create random bot as reference
 - [ ] bots can be added to the game via the AddPlayer command
   - [ ] add argument to AddPlayer that accepts a name and load that bot if it exists, use that player's name alongside the player's color (ie, barabbas/Blue)
     - human players may have a name if it doesn't conflict with a bot's name
 - [ ] each bot is put into a cs file named whatever their name is (ie, bots/barabbas.cs)
   - this cs file is the entrypoint for each bot (using cs events)
+
 - [ ] during the game, if the current player is a bot, then use the 'make move' (else use the cli intrepreter (since it's a human player))
 - [ ] during the game, if the current player is a bot, set a timer to ensure their move is under the configurable time limit, pass if it elapses
   - remember that they can send a move list without a pass at the end, get a response, then keep moving
@@ -61,17 +59,17 @@ Illegal moves have no effect on your turn.
 
 ## todo
 
-- [ ] update rules from V1 to V2 of the rulebook
-- [ ] check game file to ensure it only has the necessary moves for playback
+- [ ] update rules from V1 to V2 of the rulebook (just did a major refactor of the rules/command sections, sorry) (Andrew)
+- [ ] check game file to ensure it is suitable for machine learning purposes (rework and slim down as necessary, was just a throw together first shot) (Andrew?)
 - [ ] write rules for bot competition (round robin, speed per turn, delivery size limit, code must be checked in by the time of the match (9:00p)) and send email blast
   - list rules in the Bot.cs class
   - add instructions on the readme of how to make a bot
   - add link to version 2.0 rules for the game
+  - [ ] Singleplayer challange
+    - In a one player game, use all bots to see which scores the most amount of points
 
 ### stretch goals
 
-- [ ] Singleplayer challange
-  - In a one player game, use all bots to see which scores the most amount of points
 - [ ] Move terminal commands into custom terminal module (so we can turn them off or redirect output to an interface, log file, or something down the line)
   - Use my terminal package?
 - [ ] Colors for terminal interface output

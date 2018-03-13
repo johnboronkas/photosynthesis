@@ -11,7 +11,7 @@ namespace photosynthesis.interpreter
 {
     public class CommandInterpreter
     {
-        public CommandState DoAction(GameState gameState, List<string> action)
+        public CommandState DoAction(GameState gameState, List<string> action, bool checkOnly = false)
         {
             try
             {
@@ -33,15 +33,23 @@ namespace photosynthesis.interpreter
                     return CommandState.Failure;
                 }
 
-                CommandResponse response = command.Perform(gameState, action.ToArray());
-                switch (response.State)
+                CommandResponse response;
+                if (checkOnly)
                 {
-                    case CommandState.GameStateUpdated:
-                        gameState.GameFile.AddMove(gameState.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
-                        break;
-                    case CommandState.Failure:
-                        Console.WriteLine(response);
-                        break;
+                    response = command.CanPerform(gameState, action.ToArray());
+                }
+                else
+                {
+                    response = command.Perform(gameState, action.ToArray());
+                    switch (response.State)
+                    {
+                        case CommandState.GameStateUpdated:
+                            gameState.GameFile.AddMove(gameState.CurrentPlayer.Team + " " + action.Aggregate((s1, s2) => { return s1 + " " + s2; }));
+                            break;
+                        case CommandState.Failure:
+                            Console.WriteLine(response);
+                            break;
+                    }
                 }
 
                 return response.State;

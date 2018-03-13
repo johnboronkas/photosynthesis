@@ -26,13 +26,8 @@ namespace photosynthesis.bots
     public abstract class Bot
     {
         /// <summary>
-        /// This will be called during the starting rounds when players place their starting trees.
-        /// </summary>
-        /// <returns>A list of commands for the interpreter.</returns>
-        public abstract List<string> SubmitInitialMove(GameState gameState);
-
-        /// <summary>
-        /// This will be called during the main part of the game to request what to do next.
+        /// This will be called during your turn to request what to do next.
+        /// Don't forget about the initial setup (gameState.GameMode.IsSet(GameMode.Init)).
         /// </summary>
         /// <returns>A list of commands for the interpreter.</returns>
         public abstract List<string> SubmitMove(GameState gameState);
@@ -44,23 +39,35 @@ namespace photosynthesis.bots
             commandInterpreter = new CommandInterpreter();
         }
 
+        /// <summary>
+        /// Returns true if this move is able to be used, otherwise false.
+        /// Starting trees may only be placed on the perimeter of the map.
+        /// </summary>
+        /// <param name="hex">The hex to attempt to place your starting tree on.</param>
+        /// <param name="gameState">The GameState to test against.</param>
+        /// <returns></returns>
         protected bool CanPlaceStartingTree(Hex hex, GameState gameState)
         {
-            // TODO
-            return false;
+            var cmd = ("placestartingtree " + hex.AsCommandInput()).Split(' ').ToList();
+            return commandInterpreter.DoAction(gameState, cmd, checkOnly: true) != CommandState.Failure;
         }
 
+        /// <summary>
+        /// Returns true if this move was successfully used, otherwise false.
+        /// Starting trees may only be placed on the perimeter of the map.
+        /// </summary>
+        /// <param name="hex">The hex to attempt to place your starting tree on.</param>
+        /// <param name="gameState">The GameState to test against.</param>
         protected bool PlaceStartingTree(Hex hex, GameState gameState)
         {
-            List<string> cmd = ("placestartingtree " + hex.AsCommandInput()).Split(' ').ToList();
-            CommandState response = commandInterpreter.DoAction(gameState, cmd);
-            return response != CommandState.Failure;
+            var cmd = ("placestartingtree " + hex.AsCommandInput()).Split(' ').ToList();
+            return commandInterpreter.DoAction(gameState, cmd) != CommandState.Failure;
         }
 
         protected bool CanBuy(Token token, GameState gameState)
         {
-            // TODO
-            return false;
+            var cmd = ("buy " + token.ToString()).Split(' ').ToList();
+            return commandInterpreter.DoAction(gameState, cmd, checkOnly: true) != CommandState.Failure;
         }
 
         /// <summary>
@@ -70,42 +77,41 @@ namespace photosynthesis.bots
         /// <returns>True if the command succeeded, otherwise false.</returns>
         protected bool Buy(Token token, GameState gameState)
         {
-            List<string> cmd = ("buy " + token.ToString()).Split(' ').ToList();
-            CommandState response = commandInterpreter.DoAction(gameState, cmd);
-            return response != CommandState.Failure;
+            var cmd = ("buy " + token.ToString()).Split(' ').ToList();
+            return commandInterpreter.DoAction(gameState, cmd) != CommandState.Failure;
         }
 
         protected bool CanGrow(Hex hex, GameState gameState)
         {
-            // TODO
-            return false;
+            var cmd = ("grow " + hex.AsCommandInput()).Split(' ').ToList();
+            return commandInterpreter.DoAction(gameState, cmd, checkOnly: true) != CommandState.Failure;
         }
 
         protected bool Grow(Hex hex, GameState gameState)
         {
-            List<string> cmd = ("grow " + hex.AsCommandInput()).Split(' ').ToList();
-            CommandState response = commandInterpreter.DoAction(gameState, cmd);
-            return response != CommandState.Failure;
+            var cmd = ("grow " + hex.AsCommandInput()).Split(' ').ToList();
+            return commandInterpreter.DoAction(gameState, cmd) != CommandState.Failure;
         }
 
         protected bool CanSeed(Hex from, Hex to, GameState gameState)
         {
-            // TODO
-            return false;
+            var cmd = string.Format("{0} {1} {2}", "seed", from.AsCommandInput(), to.AsCommandInput()).Split(' ').ToList();
+            return commandInterpreter.DoAction(gameState, cmd, checkOnly: true) != CommandState.Failure;
         }
 
         protected bool Seed(Hex from, Hex to, GameState gameState)
         {
-            List<string> cmd = string.Format("{0} {1} {2}", "seed", from.AsCommandInput(), to.AsCommandInput()).Split(' ').ToList();
-            CommandState response = commandInterpreter.DoAction(gameState, cmd);
-            return response != CommandState.Failure;
+            var cmd = string.Format("{0} {1} {2}", "seed", from.AsCommandInput(), to.AsCommandInput()).Split(' ').ToList();
+            return commandInterpreter.DoAction(gameState, cmd) != CommandState.Failure;
         }
 
         /// <summary>
         /// A Pass indicates the end of your turn, play will continue with the next player.
+        /// Note that Passing is automagically done when placing your starting trees.
         /// </summary>
         protected void Pass(GameState gameState)
         {
+            if (!gameState.GameMode.IsSet(GameMode.Playing)) return;
             commandInterpreter.DoAction(gameState, new List<string>() { "pass" });
         }
     }
