@@ -92,17 +92,14 @@ namespace photosynthesis.state
             LightPoints = Math.Min(LightPoints + lightPoints, MaxLightPoints);
         }
 
-        public bool TrySubtractLightPoints(int lightPointCost)
+        public void SubtractLightPoints(int lightPoints)
         {
-            if (LightPoints < lightPointCost)
-            {
-                return false;
-            }
-            else
-            {
-                LightPoints -= lightPointCost;
-                return true;
-            }
+            LightPoints = Math.Max(LightPoints - lightPoints, 0);
+        }
+
+        public bool CanAfford(int lightPointCost)
+        {
+            return LightPoints < lightPointCost;
         }
 
         public void AddScore(int spaceScoreValue, ScoreTokens scoreTokens)

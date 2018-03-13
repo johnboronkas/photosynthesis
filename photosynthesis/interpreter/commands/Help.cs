@@ -6,13 +6,14 @@ namespace photosynthesis.interpreter.commands
 {
     public class Help : Command
     {
-        // TODO Save/load gamefile and resume play.
-        // TODO Add setup commands (ie, StartGame RandomBot Human MiddleBot Human -- where bots are loaded via reflection).
-        // TODO Load gamefile and step through it forwards (to 'watch' the game).
-
         public GameMode GetUseability()
         {
             return GameMode.Config | GameMode.Init | GameMode.Playing;
+        }
+
+        public CommandResponse CanPerform(GameState gameState, params string[] parameters)
+        {
+            return new CommandResponse(CommandState.Successful);
         }
 
         public CommandResponse Perform(GameState gameState, params string[] parameters)

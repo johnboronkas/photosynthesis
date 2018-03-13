@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using photosynthesis.interpreter;
 using photosynthesis.interpreter.commands;
 using photosynthesis.state;
@@ -10,7 +11,7 @@ namespace photosynthesis.bots
     /// 
     /// Note that GameState is the actual GameState used by the game engine, so don't mess with it.
     /// You may access and look at anything within it, but may not modifiy it.
-    /// There are no automated checks for this because deep copies are a pita.
+    /// There are no automated checks for this because deep copies are a pita and I don't feel like implementing momentos or hashes.
     /// 
     /// I will be doing code reviews before every match, so please play by the rules.
     /// 
@@ -36,6 +37,13 @@ namespace photosynthesis.bots
         /// <returns>A list of commands for the interpreter.</returns>
         public abstract List<string> SubmitMove(GameState gameState);
 
+        private CommandInterpreter commandInterpreter;
+
+        public Bot()
+        {
+            commandInterpreter = new CommandInterpreter();
+        }
+
         protected bool CanPlaceStartingTree(Hex hex, GameState gameState)
         {
             // TODO
@@ -44,8 +52,9 @@ namespace photosynthesis.bots
 
         protected bool PlaceStartingTree(Hex hex, GameState gameState)
         {
-            CommandResponse response = new PlaceStartingTree().Perform(gameState, "placestartingtree", hex.AsCommandInput());
-            return response.State != CommandState.Failure;
+            List<string> cmd = ("placestartingtree " + hex.AsCommandInput()).Split(' ').ToList();
+            CommandState response = commandInterpreter.DoAction(gameState, cmd);
+            return response != CommandState.Failure;
         }
 
         protected bool CanBuy(Token token, GameState gameState)
@@ -61,8 +70,9 @@ namespace photosynthesis.bots
         /// <returns>True if the command succeeded, otherwise false.</returns>
         protected bool Buy(Token token, GameState gameState)
         {
-            CommandResponse response = new Buy().Perform(gameState, "buy", token.ToString());
-            return response.State != CommandState.Failure;
+            List<string> cmd = ("buy " + token.ToString()).Split(' ').ToList();
+            CommandState response = commandInterpreter.DoAction(gameState, cmd);
+            return response != CommandState.Failure;
         }
 
         protected bool CanGrow(Hex hex, GameState gameState)
@@ -73,8 +83,9 @@ namespace photosynthesis.bots
 
         protected bool Grow(Hex hex, GameState gameState)
         {
-            CommandResponse response = new Grow().Perform(gameState, "grow", hex.AsCommandInput());
-            return response.State != CommandState.Failure;
+            List<string> cmd = ("grow " + hex.AsCommandInput()).Split(' ').ToList();
+            CommandState response = commandInterpreter.DoAction(gameState, cmd);
+            return response != CommandState.Failure;
         }
 
         protected bool CanSeed(Hex from, Hex to, GameState gameState)
@@ -85,13 +96,17 @@ namespace photosynthesis.bots
 
         protected bool Seed(Hex from, Hex to, GameState gameState)
         {
-            CommandResponse response = new Seed().Perform(gameState, "seed", string.Format("{0} {1}", from.AsCommandInput(), to.AsCommandInput()));
-            return response.State != CommandState.Failure;
+            List<string> cmd = string.Format("{0} {1} {2}", "seed", from.AsCommandInput(), to.AsCommandInput()).Split(' ').ToList();
+            CommandState response = commandInterpreter.DoAction(gameState, cmd);
+            return response != CommandState.Failure;
         }
 
+        /// <summary>
+        /// A Pass indicates the end of your turn, play will continue with the next player.
+        /// </summary>
         protected void Pass(GameState gameState)
         {
-            new Pass().Perform(gameState, "pass");
+            commandInterpreter.DoAction(gameState, new List<string>() { "pass" });
         }
     }
 }

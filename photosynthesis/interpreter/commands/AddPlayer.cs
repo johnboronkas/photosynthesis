@@ -10,16 +10,27 @@ namespace photosynthesis.interpreter.commands
             return GameMode.Config;
         }
 
-        public CommandResponse Perform(GameState gameState, params string[] parameters)
+        public CommandResponse CanPerform(GameState gameState, params string[] parameters)
         {
-            int playerCount = gameState.Players.Count;
-
-            if (playerCount >= GameState.MaxPlayers)
+            if (gameState.Players.Count >= GameState.MaxPlayers)
             {
                 return new CommandResponse(CommandState.Failure, string.Format("Cannot add another player. Already at the max of {0} players.", GameState.MaxPlayers));
             }
+            else
+            {
+                return new CommandResponse(CommandState.Successful);
+            }
+        }
 
-            var newPlayer = new Player((Team)playerCount + 1);
+        public CommandResponse Perform(GameState gameState, params string[] parameters)
+        {
+            CommandResponse response = CanPerform(gameState, parameters);
+            if (response.State == CommandState.Failure)
+            {
+                return response;
+            }
+
+            var newPlayer = new Player((Team)gameState.Players.Count + 1);
             gameState.AddPlayer(newPlayer);
 
             if (gameState.GameMode.IsSet(GameMode.HumanFriendly)) Console.WriteLine("{0} player added ({1}/{2} players in game).",

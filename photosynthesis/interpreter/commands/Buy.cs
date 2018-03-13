@@ -10,7 +10,7 @@ namespace photosynthesis.interpreter.commands
             return GameMode.Playing;
         }
 
-        public CommandResponse Perform(GameState gameState, params string[] parameters)
+        public CommandResponse CanPerform(GameState gameState, params string[] parameters)
         {
             string tokenInput = parameters[1];
             Token tokenToBuy;
@@ -20,7 +20,22 @@ namespace photosynthesis.interpreter.commands
             int? tokenCost = player.GetTokenCost(tokenToBuy);
             if (!tokenCost.HasValue) return new CommandResponse(CommandState.Failure, "Token to buy missing from the shop. Nothing to buy.");
 
-            if (!player.TrySubtractLightPoints(tokenCost.Value)) return new CommandResponse(CommandState.Failure, "Insufficient light points.");
+            if (!player.CanAfford(tokenCost.Value)) return new CommandResponse(CommandState.Failure, "Insufficient light points.");
+
+            return new CommandResponse(CommandState.Successful);
+        }
+
+        public CommandResponse Perform(GameState gameState, params string[] parameters)
+        {
+            CommandResponse response = CanPerform(gameState, parameters);
+            if (response.State == CommandState.Failure)
+            {
+                return response;
+            }
+
+            Player player = gameState.CurrentPlayer;
+            Token tokenToBuy = (Token)Enum.Parse(typeof(Token), parameters[1], true);
+            player.SubtractLightPoints(player.GetTokenCost(tokenToBuy).Value);
             player.Shop.Remove(tokenToBuy);
             player.Hand.Add(tokenToBuy);
             return new CommandResponse(CommandState.GameStateUpdated);
@@ -28,7 +43,7 @@ namespace photosynthesis.interpreter.commands
 
         public override string ToString()
         {
-            return HelpString.Create(GetType().Name, "[seed|smalltree|mediumtree|largetree]", "Buys a token from your shop.");
+            return HelpString.Create(GetType().Name, "seed/smalltree/mediumtree/largetree", "Buys a token from your shop.");
         }
     }
 }

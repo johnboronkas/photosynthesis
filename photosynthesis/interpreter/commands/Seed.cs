@@ -10,7 +10,7 @@ namespace photosynthesis.interpreter.commands
             return GameMode.Playing;
         }
 
-        public CommandResponse Perform(GameState gameState, params string[] parameters)
+        public CommandResponse CanPerform(GameState gameState, params string[] parameters)
         {
             Player player = gameState.CurrentPlayer;
 
@@ -39,8 +39,24 @@ namespace photosynthesis.interpreter.commands
             }
 
             if (spaceTo.Token != Token.None) return new CommandResponse(CommandState.Failure, "Destination hex not empty.");
-            if (!player.TrySubtractLightPoints(Player.ShootSeedCost)) return new CommandResponse(CommandState.Failure, "Insufficient light points.");
+            if (!player.CanAfford(Player.ShootSeedCost)) return new CommandResponse(CommandState.Failure, "Insufficient light points.");
 
+            return new CommandResponse(CommandState.Successful);
+        }
+
+        public CommandResponse Perform(GameState gameState, params string[] parameters)
+        {
+            CommandResponse response = CanPerform(gameState, parameters);
+            if (response.State == CommandState.Failure)
+            {
+                return response;
+            }
+
+            Player player = gameState.CurrentPlayer;
+            Space spaceFrom = gameState.Board.State[CommandInterpreter.ParamsToHex(parameters.Skip(1).Take(3).ToList())];
+            Space spaceTo = gameState.Board.State[CommandInterpreter.ParamsToHex(parameters.Skip(4).Take(3).ToList())];
+            
+            player.SubtractLightPoints(Player.ShootSeedCost);
             player.Hand.Remove(Token.Seed);
             spaceTo.Set(player.Team, Token.Seed);
             player.UsedSpaces.Add(spaceFrom);

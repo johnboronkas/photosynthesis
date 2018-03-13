@@ -9,6 +9,11 @@ namespace photosynthesis.interpreter.commands
             return GameMode.Init | GameMode.Playing;
         }
 
+        public CommandResponse CanPerform(GameState gameState, params string[] parameters)
+        {
+            return new CommandResponse(CommandState.Successful);
+        }
+
         public CommandResponse Perform(GameState gameState, params string[] parameters)
         {
             Console.WriteLine(gameState.Board.HexesHumanReadable());
