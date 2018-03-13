@@ -43,6 +43,11 @@ namespace photosynthesis.state
             return string.Format("({0} {1} {2})", Q, R, S);
         }
 
+        public string AsCommandInput()
+        {
+            return string.Format("{0} {1} {2}", Q, R, S);
+        }
+
         public static Hex Zero()
         {
             return new Hex(0, 0, 0);

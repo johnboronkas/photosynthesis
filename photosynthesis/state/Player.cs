@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using photosynthesis.bots;
 
 namespace photosynthesis.state
 {
@@ -44,15 +45,19 @@ namespace photosynthesis.state
         };
 
         public Team Team { get; private set; }
+        public string Name { get; private set; }
+        public Bot Bot { get; private set; }
         public int LightPoints { get; private set; }
         public List<Token> Hand { get; private set; }
         public List<Token> Shop { get; private set; }
         public int Score { get; private set; }
         public List<Space> UsedSpaces { get; private set; }
 
-        public Player(Team team)
+        public Player(Team team, string name = "", Bot bot = null)
         {
             Team = team;
+            Name = name;
+            Bot = bot;
             LightPoints = 0;
             Hand = new List<Token>()
             {
