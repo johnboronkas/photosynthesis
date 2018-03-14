@@ -40,7 +40,6 @@ Illegal moves have no effect on your turn.
 
 ## bots todo list
 
-- [ ] add comments to all methods in the Bot class
 - [ ] create random bot as reference
 - [ ] bots can be added to the game via the AddPlayer command
   - [ ] add argument to AddPlayer that accepts a name and load that bot if it exists, use that player's name alongside the player's color (ie, barabbas/Blue)
@@ -61,10 +60,10 @@ Illegal moves have no effect on your turn.
 
 - [ ] update rules from V1 to V2 of the rulebook (just did a major refactor of the rules/command sections, sorry) (Andrew)
 - [ ] check game file to ensure it is suitable for machine learning purposes (rework and slim down as necessary, was just a throw together first shot) (Andrew?)
-- [ ] write rules for bot competition (round robin, speed per turn, delivery size limit, code must be checked in by the time of the match (9:00p)) and send email blast
-  - list rules in the Bot.cs class
-  - add instructions on the readme of how to make a bot
-  - add link to version 2.0 rules for the game
+- [ ] need a 'load' and 'next' command for game files to allow people to go into an after-action report mode with just show commands and next
+  - make unique names for the game files based on who is in the match and the timestamp
+- [ ] add instructions on the readme of how to make a bot
+- [ ] add link to version 2.0 rules for the game
   - [ ] Singleplayer challange
     - In a one player game, use all bots to see which scores the most amount of points
 

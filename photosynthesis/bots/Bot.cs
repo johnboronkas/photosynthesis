@@ -8,29 +8,13 @@ namespace photosynthesis.bots
 {
     /// <summary>
     /// All bots must extend this class.
-    /// 
-    /// Note that GameState is the actual GameState used by the game engine, so don't mess with it.
-    /// You may access and look at anything within it, but may not modifiy it.
-    /// There are no automated checks for this because deep copies are a pita and I don't feel like implementing momentos or hashes.
-    /// 
-    /// I will be doing code reviews before every match, so please play by the rules.
-    /// 
-    /// I'm always available for questions or reviews if you are unsure if something
-    /// you are doing is legal or not.
-    /// 
-    /// 
-    /// RULES
-    /// TODO
-    /// 
     /// </summary>
     public abstract class Bot
     {
         /// <summary>
         /// This will be called during your turn to request what to do next.
-        /// Don't forget about the initial setup (gameState.GameMode.IsSet(GameMode.Init)).
         /// </summary>
-        /// <returns>A list of commands for the interpreter.</returns>
-        public abstract List<string> SubmitMove(GameState gameState);
+        public abstract void MakeMoves(GameState gameState);
 
         private CommandInterpreter commandInterpreter;
 
@@ -40,12 +24,12 @@ namespace photosynthesis.bots
         }
 
         /// <summary>
-        /// Returns true if this move is able to be used, otherwise false.
+        /// Checks if able to place starting tree on provided hex.
         /// Starting trees may only be placed on the perimeter of the map.
         /// </summary>
         /// <param name="hex">The hex to attempt to place your starting tree on.</param>
         /// <param name="gameState">The GameState to test against.</param>
-        /// <returns></returns>
+        /// <returns>True if this move is able to be used, otherwise false.</returns>
         protected bool CanPlaceStartingTree(Hex hex, GameState gameState)
         {
             var cmd = ("placestartingtree " + hex.AsCommandInput()).Split(' ').ToList();
@@ -53,17 +37,23 @@ namespace photosynthesis.bots
         }
 
         /// <summary>
-        /// Returns true if this move was successfully used, otherwise false.
+        /// Places starting tree on provided hex.
         /// Starting trees may only be placed on the perimeter of the map.
         /// </summary>
         /// <param name="hex">The hex to attempt to place your starting tree on.</param>
         /// <param name="gameState">The GameState to test against.</param>
+        /// <returns>True if the move was performed, otherwise false.</returns>
         protected bool PlaceStartingTree(Hex hex, GameState gameState)
         {
             var cmd = ("placestartingtree " + hex.AsCommandInput()).Split(' ').ToList();
             return commandInterpreter.DoAction(gameState, cmd) != CommandState.Failure;
         }
 
+        /// <summary>
+        /// Checks if able to buy the given Token from your shop.
+        /// </summary>
+        /// <param name="token">The Token to buy.</param>
+        /// <returns>True if the move is able to be used, otherwise false.</returns>
         protected bool CanBuy(Token token, GameState gameState)
         {
             var cmd = ("buy " + token.ToString()).Split(' ').ToList();
@@ -71,34 +61,56 @@ namespace photosynthesis.bots
         }
 
         /// <summary>
-        /// Attempts to buy the given Token from your shop.
+        /// Buys the given Token from your shop.
         /// </summary>
         /// <param name="token">The Token to buy.</param>
-        /// <returns>True if the command succeeded, otherwise false.</returns>
+        /// <returns>True if the move was performed, otherwise false.</returns>
         protected bool Buy(Token token, GameState gameState)
         {
             var cmd = ("buy " + token.ToString()).Split(' ').ToList();
             return commandInterpreter.DoAction(gameState, cmd) != CommandState.Failure;
         }
 
+        /// <summary>
+        /// Checks if able to grow the provided hex.
+        /// </summary>
+        /// <param name="hex">The hex to grow.</param>
+        /// <returns>True if the move is able to be used, otherwise false.</returns>
         protected bool CanGrow(Hex hex, GameState gameState)
         {
             var cmd = ("grow " + hex.AsCommandInput()).Split(' ').ToList();
             return commandInterpreter.DoAction(gameState, cmd, checkOnly: true) != CommandState.Failure;
         }
 
+        /// <summary>
+        /// Grows the provided hex.
+        /// </summary>
+        /// <param name="hex">The hex to grow.</param>
+        /// <returns>True if the move was performed, otherwise false.</returns>
         protected bool Grow(Hex hex, GameState gameState)
         {
             var cmd = ("grow " + hex.AsCommandInput()).Split(' ').ToList();
             return commandInterpreter.DoAction(gameState, cmd) != CommandState.Failure;
         }
 
+        /// <summary>
+        /// Checks if able to seed from one hex to another.
+        /// </summary>
+        /// <param name="from">The hex to seed from.</param>
+        /// <param name="to">The hex to shoot the seed to.</param>
+        /// <returns>True if the move is able to be used, otherwise false.</returns>
         protected bool CanSeed(Hex from, Hex to, GameState gameState)
         {
             var cmd = string.Format("{0} {1} {2}", "seed", from.AsCommandInput(), to.AsCommandInput()).Split(' ').ToList();
             return commandInterpreter.DoAction(gameState, cmd, checkOnly: true) != CommandState.Failure;
         }
 
+        /// <summary>
+        /// Seeds from one hex to another.
+        /// </summary>
+        /// <param name="from">The hex to seed from.</param>
+        /// <param name="to">The hex to shoot the seed to.</param>
+        /// <returns>True if the move was performed, otherwise false.</returns>
         protected bool Seed(Hex from, Hex to, GameState gameState)
         {
             var cmd = string.Format("{0} {1} {2}", "seed", from.AsCommandInput(), to.AsCommandInput()).Split(' ').ToList();
