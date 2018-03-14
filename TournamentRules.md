@@ -7,25 +7,25 @@ Based on the number of entries we get, there will be prizes for the top 3 bots.
 ## Rules
 
 1. GameState is the actual GameState used by the game engine, so don't mess with it.
-  - You may access and look at anything within it, but may not modifiy it.
-  - There are no automated checks for this because deep copies are a pita and I don't feel like implementing momentos, serialization, or hashes.
+  * You may access and look at anything within it, but may not modifiy it.
+  * There are no automated checks for this because deep copies are a pita and I don't feel like implementing momentos, serialization, or hashes.
 
 2. I will be doing code reviews for cheats before every match, so please play by the rules.
 
 3. Feel free to go crazy. If you want to call out to a super computer somewhere to run some calulcation, go for it.
-  - If you want hooks into another language, go for it.
-  - You must provide startup instructions for any addional program you want me to run.
+  * If you want hooks into another language, go for it.
+  * You must provide startup instructions for any addional program you want me to run.
 
 4. Don't do anything funny with looking for certain bot names or messing with any directory on the computer other than the one provided to you.
-  - IE, bots should not be conditionally teaming up based on bot names.
+  * IE, bots should not be conditionally teaming up based on bot names.
 
 5. A bot that fails to finish their move within one minute will automatically be passed.
 
 6. All source code and supporting files & libraries (even files/code that is executed remotely. must be, and remain, under 10GB uncompressed.
-  - So, if you will be generating files, maintaining a database, or so on, ensure that it never exceeds 10GB while the game is being played.
+  * So, if you will be generating files, maintaining a database, or so on, ensure that it never exceeds 10GB while the game is being played.
 
 7. Code must be checked in or otherwise submitted by 9:00pm on the night of your match. I'll take whatever cut was available at 9:00pm or the last one that was sent.
-  - You don't need to check your bot into the photosynthesis repository for competitive reasons, but it should be somewhere where I have access to it (or just emailed to me).
+  * You don't need to check your bot into the photosynthesis repository for competitive reasons, but it should be somewhere where I have access to it (or just emailed to me).
 
 I'm always available for questions or reviews if you are unsure if something
 you are doing is legal or not.
