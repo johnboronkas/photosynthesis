@@ -38,7 +38,7 @@ A [hex-grid representation](https://www.redblobgames.com/grids/hexagons/) of the
 `Help` shows a list of available commands and their descriptions.
 Illegal moves have no effect on your turn.
 
-## bots todo list
+## bots todo list (John)
 
 - [ ] create random bot as reference
 - [ ] bots can be added to the game via the AddPlayer command
@@ -59,7 +59,7 @@ Illegal moves have no effect on your turn.
 ## todo
 
 - [ ] update rules from V1 to V2 of the rulebook (just did a major refactor of the rules/command sections, sorry) (Andrew)
-- [ ] check game file to ensure it is suitable for machine learning purposes (rework and slim down as necessary, was just a throw together first shot) (Andrew?)
+- [ ] check game file to ensure it is suitable for machine learning purposes (rework and slim down as necessary) (Andrew?/entire ML group?)
 - [ ] need a 'load' and 'next' command for game files to allow people to go into an after-action report mode with just show commands and next
   - make unique names for the game files based on who is in the match and the timestamp
 - [ ] add instructions on the readme of how to make a bot
