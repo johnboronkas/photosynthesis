@@ -2,7 +2,7 @@
 
 ## Prizes
 
-Based on the number of entries we get, there will be prizes for the top 3 bots.
+Based on the number of entries we get, there will be prizes for the top bots.
 
 ## Rules
 
@@ -16,9 +16,10 @@ Based on the number of entries we get, there will be prizes for the top 3 bots.
 4. Don't do anything funny with looking for certain bot names or messing with any directory on the computer other than the one provided to you.
    - IE, bots should not be conditionally teaming up based on bot names.
 5. A bot that fails to finish their move within one minute will automatically be passed.
-6. All source code and supporting files & libraries (even files/code that is executed remotely. must be, and remain, under 10GB uncompressed.
+6. All source code and supporting files & libraries, even files/code that are executed remotely, must be and remain under 10GB uncompressed.
    - So, if you will be generating files, maintaining a database, or so on, ensure that it never exceeds 10GB while the game is being played.
-7. Code must be checked in or otherwise submitted by 9:00pm on the night of your match. I'll take whatever cut was available at 9:00pm or the last one that was sent.
+7. Code must be checked in or otherwise submitted by 9:00pm on the night of your match.
+   - I'll take whatever cut was available at 9:00pm or the last one that was sent.
    - You don't need to check your bot into the photosynthesis repository for competitive reasons, but it should be somewhere where I have access to it (or just emailed to me).
 
 I'm always available for questions or reviews if you are unsure if something
@@ -53,7 +54,7 @@ Each group will consist of a round-robin of 1v1, 3-player, and 4-player games us
     - Loss:  0 pts
     - Draw: Split the tie position's points
 
-The perfect score for a group stage is 900 points.
+A perfect score for the group stage is 900 points with 1,180 points able to be earned.
 
 ### Elimination Stage
 
@@ -68,8 +69,12 @@ TODO Details to come based on the number of submissions.
 
 The remaining 2 bots from the elimination stage will move on to the finals.
 
-The finals will be a best of 7 series of 1v1 games with alternating starting players.
+The finals will be a best-of-7 series of 1v1 games with alternating starting players.
 
 Each of the 2 final bots will be put into a single-player game where they will attempt to score as many points as possible before the end of the game.
 The winning bot's owner will get to choose if they want to go first or second during the first game of the best-of-7 series.
 If tied, it will be based on the number of points earned during the elimination stage.
+
+## Schedule
+
+TBD
