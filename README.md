@@ -64,8 +64,11 @@ Illegal moves have no effect on your turn.
   - make unique names for the game files based on who is in the match and the timestamp
 - [ ] add instructions on the readme of how to make a bot
 - [ ] add link to version 2.0 rules for the game
-  - [ ] Singleplayer challange
-    - In a one player game, use all bots to see which scores the most amount of points
+- [ ] serialize gamestate and all related classes to and from json
+  - [ ] use this to pass a deep copy of the game state to the bots and have bots return a move list
+  - [ ] update tournament rules
+- [ ] setup rest endpoints and provide methods for calling out to an endpoint to do posts or gets for bots
+  - [ ] update sample bot to use them
 
 ### stretch goals
 
